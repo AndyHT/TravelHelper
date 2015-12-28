@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="Test1.xcdatamodel" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <elements/>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15C50" minimumToolsVersion="Automatic">
+    <entity name="Bills" syncable="YES"/>
+    <entity name="Items" syncable="YES"/>
+    <entity name="Notes" syncable="YES"/>
+    <entity name="Plans" syncable="YES"/>
+    <elements>
+        <element name="Plans" positionX="-63" positionY="-18" width="128" height="45"/>
+        <element name="Notes" positionX="-54" positionY="-9" width="128" height="45"/>
+        <element name="Items" positionX="-36" positionY="9" width="128" height="45"/>
+        <element name="Bills" positionX="-18" positionY="27" width="128" height="45"/>
+    </elements>
 </model>

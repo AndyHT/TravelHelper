@@ -4,11 +4,11 @@
 //
 //  Created by Teng on 12/20/15.
 //  Copyright © 2015 huoteng. All rights reserved.
-//
+//  首页内容展示
 
 import UIKit
 
-class ViewController: UIViewController {
+class MainViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
