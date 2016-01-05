@@ -67,12 +67,18 @@ post请求，数据用json格式发送
 ```
 ###Response post body:
 ```jsonArr
+[{
+	"start" : "start time",
+	"end" : "end time",
+	"description" : "description",
+	"plan_num" : "plan number"
+},
 {
 	"start" : "start time",
 	"end" : "end time",
 	"description" : "description",
 	"plan_num" : "plan number"
-}
+}]
 ```
 
 ##获得该用户所有备忘录：
@@ -86,10 +92,14 @@ post请求，数据用json格式发送
 ```
 ###Response post body
 ```jsonArr
+[{
+	"content" : "content",
+	"time" : "time"
+},
 {
 	"content" : "content",
 	"time" : "time"
-}
+}]
 ```
 
 ##获得该用户所有账单
