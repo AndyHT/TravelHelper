@@ -26,7 +26,6 @@ post请求，数据用json格式发送
 
 
 ##注册：
-~~###URL:http://localhost:8888/signup/~~
 ###URL:http://localhost:8088/travel_helper/register
 post请求，数据用json格式发送
 ###Request post body:
@@ -56,18 +55,23 @@ post请求，数据用json格式发送
 ```
 返回个注册成功或者失败的标记，然后顺便就相当于登录了
 
-##获得该用户所有计划：
-###URL:http://localhost:8088/teavel_helper/plans/
+##获得用户数据：
+###URL:http://localhost:8088/teavel_helper/data/
 post请求，数据用json格式发送
 ###Request post body:
 ```json
 {
 	"sessionID" : "sessionID"
+	"dataType" : "怎么表示要查询数据类型？后台确定一下，用字符串还是数字"
 }
 ```
 ###Response post body:
-```jsonArr
+```json
 [{
+	"sessionID" : "sessionID",
+	"dataType" : "dataType"
+},
+{
 	"start" : "start time",
 	"end" : "end time",
 	"description" : "description",
@@ -81,50 +85,17 @@ post请求，数据用json格式发送
 }]
 ```
 
-##获得该用户所有备忘录：
-###URL:http://localhost:8088/travel_helper/notes/
+##向后台发送用户数据：
+###URL:http://localhost:8088/travel_helper/后台确定一下URL/
 post请求，数据用json格式发送
 ###Request post body:
 ```json
 {
-	"sessionID" : "sessionID"
+	"sessionID" : "sessionID",
+	"dataType" : "怎么表示要查询数据类型？后台确定一下，用字符串还是数字"
 }
 ```
 ###Response post body
-```jsonArr
-[{
-	"content" : "content",
-	"time" : "time"
-},
-{
-	"content" : "content",
-	"time" : "time"
-}]
-```
-
-##获得该用户所有账单
-###URL:http://localhost:8088/travel_helper/bills/
-post请求，数据用json格式发送
-###Request post body:
 ```json
-{
-	"sessionID" : "sessionID"
-}
+数据插入是否成功
 ```
-
-###Response post body:
-```json
-[{
-	"value" : "value",
-	"description" : "description",
-	"type" : "bill type",
-	"time" : "create time"
-},
-{
-	"value" : "value",
-	"description" : "description",
-	"type" : "bill type",
-	"time" : "create time"
-}]
-```
-

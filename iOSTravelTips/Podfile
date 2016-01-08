@@ -4,6 +4,7 @@ use_frameworks!
 target 'TravelTips' do
   pod 'Alamofire', '~> 3.0'
   pod 'SwiftyJSON'
+  pod 'CryptoSwift', :git => "https://github.com/krzyzanowskim/CryptoSwift", :branch => "master"
 end
 
 target 'TravelTipsTests' do

@@ -21,6 +21,7 @@
 		A44C45691C315086003C6D7A /* SigninViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44C45681C315086003C6D7A /* SigninViewController.swift */; };
 		A44C456B1C3150C9003C6D7A /* LocalDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44C456A1C3150C9003C6D7A /* LocalDBModel.swift */; };
 		A44C456D1C3150D9003C6D7A /* ServerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44C456C1C3150D9003C6D7A /* ServerModel.swift */; };
+		A46406EF1C3BB88D00E9ECAA /* MD5.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46406EE1C3BB88D00E9ECAA /* MD5.swift */; };
 		A4D000951C329A2100A2213F /* Schedules+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D0008D1C329A2100A2213F /* Schedules+CoreDataProperties.swift */; };
 		A4D000961C329A2100A2213F /* Schedules.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D0008E1C329A2100A2213F /* Schedules.swift */; };
 		A4D000971C329A2100A2213F /* Items+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D0008F1C329A2100A2213F /* Items+CoreDataProperties.swift */; };
@@ -71,6 +72,7 @@
 		A44C45681C315086003C6D7A /* SigninViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SigninViewController.swift; sourceTree = "<group>"; };
 		A44C456A1C3150C9003C6D7A /* LocalDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalDBModel.swift; sourceTree = "<group>"; };
 		A44C456C1C3150D9003C6D7A /* ServerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerModel.swift; sourceTree = "<group>"; };
+		A46406EE1C3BB88D00E9ECAA /* MD5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MD5.swift; sourceTree = "<group>"; };
 		A4D0008D1C329A2100A2213F /* Schedules+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Schedules+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		A4D0008E1C329A2100A2213F /* Schedules.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Schedules.swift; sourceTree = "<group>"; };
 		A4D0008F1C329A2100A2213F /* Items+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Items+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 				A4D000921C329A2100A2213F /* Bills.swift */,
 				A4D000931C329A2100A2213F /* Notes+CoreDataProperties.swift */,
 				A4D000941C329A2100A2213F /* Notes.swift */,
+				A46406EE1C3BB88D00E9ECAA /* MD5.swift */,
 			);
 			name = Model;
 			path = ..;
@@ -401,6 +404,7 @@
 				A4D000981C329A2100A2213F /* Items.swift in Sources */,
 				A4D000961C329A2100A2213F /* Schedules.swift in Sources */,
 				A44C456D1C3150D9003C6D7A /* ServerModel.swift in Sources */,
+				A46406EF1C3BB88D00E9ECAA /* MD5.swift in Sources */,
 				A4D000951C329A2100A2213F /* Schedules+CoreDataProperties.swift in Sources */,
 				A4D0009B1C329A2100A2213F /* Notes+CoreDataProperties.swift in Sources */,
 				A4D000991C329A2100A2213F /* Bills+CoreDataProperties.swift in Sources */,
