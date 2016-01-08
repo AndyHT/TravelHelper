@@ -62,7 +62,8 @@ post请求，数据用json格式发送
 ```json
 {
 	"sessionID" : "sessionID"
-	"dataType" : "怎么表示要查询数据类型？后台确定一下，用字符串还是数字"
+~~	"dataType" : "怎么表示要查询数据类型？后台确定一下，用字符串还是数字"~~
+	"dataType" : "用字符串吧, 比如请求notes就用'note', 请求bill就用'bill', 请求plan就用'plan', 都用单数吧"
 }
 ```
 ###Response post body:
