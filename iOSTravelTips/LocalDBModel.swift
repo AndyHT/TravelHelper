@@ -4,7 +4,7 @@
 //
 //  Created by Teng on 12/28/15.
 //  Copyright © 2015 huoteng. All rights reserved.
-//  连接本地数据库存储数据
+//  连接本地数据库存储数据，CRUD
 
 import UIKit
 import CoreData

@@ -19,7 +19,7 @@
         <attribute name="noteId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="noteTime" optional="YES" attributeType="Date" syncable="YES"/>
     </entity>
-    <entity name="Schedules" representedClassName=".Schedules" syncable="YES">
+    <entity name="Schedule" representedClassName=".Schedules" syncable="YES">
         <attribute name="destination" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="endDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="planNum" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -30,6 +30,6 @@
         <element name="Bills" positionX="-18" positionY="27" width="128" height="120"/>
         <element name="Items" positionX="-36" positionY="9" width="128" height="120"/>
         <element name="Notes" positionX="-54" positionY="-9" width="128" height="90"/>
-        <element name="Schedules" positionX="-63" positionY="-18" width="128" height="120"/>
+        <element name="Schedule" positionX="-63" positionY="-18" width="128" height="120"/>
     </elements>
 </model>

@@ -13,7 +13,7 @@ post请求，数据用json格式发送
 ```json
 {
 	"result" : true,
-	"sessionID" : "sessionID"
+	"sessionID" : "sessionID123"
 }
 ```
 *登陆失败*
@@ -44,7 +44,7 @@ post请求，数据用json格式发送
 ```josn
 {
 	"result" : true,
-	"sessionID" : "sessionID"
+	"sessionID" : "sessionID123"
 }
 ```
 *注册失败*
@@ -56,19 +56,19 @@ post请求，数据用json格式发送
 返回个注册成功或者失败的标记，然后顺便就相当于登录了
 
 ##获得用户数据：
-###URL:http://localhost:8088/teavel_helper/data/
+###URL:http://localhost:8088/teavel_helper/data
 post请求，数据用json格式发送
 ###Request post body:
 ```json
 {
-	"sessionID" : "sessionID"
+	"sessionID" : "sessionID",
 	"dataType" : "怎么表示要查询数据类型？后台确定一下，用字符串还是数字"
 }
 ```
 ###Response post body:
 ```json
 [{
-	"sessionID" : "sessionID",
+	"sessionID" : "sessionID1234",
 	"dataType" : "dataType"
 },
 {
@@ -86,16 +86,57 @@ post请求，数据用json格式发送
 ```
 
 ##向后台发送用户数据：
-###URL:http://localhost:8088/travel_helper/后台确定一下URL/
+###URL:http://localhost:8088/travel_helper/后台确定一下URL
 post请求，数据用json格式发送
 ###Request post body:
 ```json
-{
+[{
 	"sessionID" : "sessionID",
 	"dataType" : "怎么表示要查询数据类型？后台确定一下，用字符串还是数字"
-}
+},
+{
+	"start" : "start time",
+	"end" : "end time",
+	"description" : "description",
+	"plan_num" : "plan number"
+},
+{
+	"start" : "start time",
+	"end" : "end time",
+	"description" : "description",
+	"plan_num" : "plan number"
+}]
 ```
 ###Response post body
+*数据插入成功*
 ```json
-数据插入是否成功
+{
+	"result" : true,//失败时为false
+	"sessionID" : "sessionID1234"
+}
+```
+
+##删除数据
+###URL:http://localhost:8088/travel_helper/后台确定一下URL
+post请求，数据用json格式发送
+###Request post body:
+```json
+[{
+	"sessionID" : "sessionID",
+	"dataType" : "怎么表示要查询数据类型？后台确定一下，用字符串还是数字"
+},
+{
+	"id" : "要删除数据的ID"
+},
+{
+	"id" : "要删除数据的ID"
+}]
+```
+###Response post body
+*数据删除成功*
+```json
+{
+	"result" : true,//失败时为false
+	"sessionID" : "sessionID1234"
+}
 ```

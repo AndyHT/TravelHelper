@@ -16,19 +16,9 @@ class MainViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
        
         //test
-//        ServerModel.login("test", withPass: "lalalala")
-//        Alamofire.request(.GET, "https://httpbin.org/get", parameters: ["foo": "bar"])
-//            .responseJSON { response in
-//                print("Request:\t\(response.request)")  // original URL request
-//                print("Response:\t\(response.response)")// URL response
-//                print("Data:\t\(response.data)")     // server data
-//                print("Result:\t\(response.result)")   // result of response serialization
-//                
-//                if let JSON = response.result.value {
-//                    print("JSON: \(JSON)")
-//                }
-//
-//        }
+//        ServerModel.login("test", withPass: "lalalala")//OK
+//        ServerModel.registerNewUser("", gender: "", email: "", passMD5: "")//OK
+        ServerModel.getData("", withType: .Plan)//OK
 
     }
 
