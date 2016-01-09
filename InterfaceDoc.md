@@ -143,7 +143,6 @@ post请求，数据用json格式发送
 	"time" : "time(转成字符串吧)"
 },
 {
-	"sessionID" : "sessionID",
 	"content" : "content",
 	"time" : "time(转成字符串吧)"
 }
@@ -190,8 +189,8 @@ post请求，数据用json格式发送
 	"description" : "description"
 }
 ]
-```json
-###Response post body
+```
+###Response post body  
 ```json
 {
 	"sessionID" : "sessionID",
