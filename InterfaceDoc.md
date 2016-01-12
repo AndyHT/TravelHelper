@@ -66,6 +66,7 @@ post请求，数据用json格式发送
 }
 ```
 ###Response post body:
+1.后台返回所请求的计划数据:
 ```json
 [{
 	"sessionID" : "sessionID1234",
@@ -84,7 +85,40 @@ post请求，数据用json格式发送
 	"plan_num" : "plan number"
 }]
 ```
-
+2.后台返回所请求的账单数据
+```json
+[{
+	"sessionID" : "sessionID",
+	"dataType" : "dataType"
+},
+{
+	"value" : "value",
+	"bill_description" : "bill_description",
+	"bill_type" : "bill_type",
+	"bill_time" : "bill_time(转成字符串吧)"
+},
+{
+	"value" : "value",
+	"bill_description" : "bill_description",
+	"bill_type" : "bill_type",
+	"bill_time" : "bill_time(转成字符串吧)"
+}]
+```
+3.后台返回所请求的备忘录数据
+```json
+[{
+	"sessionID" : "sessionID",
+	"dataType" : "dataType"
+},
+{
+	"content" : "content",
+	"time" : "time(转成字符串吧)"
+},
+{
+	"content" : "content",
+	"time" : "time(转成字符串吧)"
+}]
+```
 ##向后台发送用户数据：
 ###URL:http://localhost:8088/travel_helper/后台确定一下URL
 post请求，数据用json格式发送
