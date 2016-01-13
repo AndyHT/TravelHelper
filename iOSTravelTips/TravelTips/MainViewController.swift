@@ -16,9 +16,9 @@ class MainViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
        
         //test
-//        ServerModel.login("test", withPass: "lalalala")//OK
+        ServerModel.login("Alan", withPass: "lalalala")//OK
 //        ServerModel.registerNewUser("", gender: "", email: "", passMD5: "")//OK
-        ServerModel.getData("", withType: .Plan)//OK
+//        ServerModel.getData("", withType: .Plan)//OK
 
     }
 

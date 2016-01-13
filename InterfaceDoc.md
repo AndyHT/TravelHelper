@@ -61,8 +61,9 @@ post请求，数据用json格式发送
 ###Request post body:
 ```json
 {
-	"sessionID" : "sessionID",
-	"dataType" : "怎么表示要查询数据类型？后台确定一下，用字符串还是数字"
+	"sessionID" : "sessionID"
+~~	"dataType" : "怎么表示要查询数据类型？后台确定一下，用字符串还是数字"~~
+	"dataType" : "用字符串吧, 比如请求notes就用'note', 请求bill就用'bill', 请求plan就用'plan', 都用单数吧"
 }
 ```
 ###Response post body:
@@ -120,33 +121,14 @@ post请求，数据用json格式发送
 }]
 ```
 ##向后台发送用户数据：
-###URL:http://localhost:8088/travel_helper/后台确定一下URL
+###URL:http://localhost:8088/travel_helper/returnData
 post请求，数据用json格式发送
 ###Request post body:
 ```json
 [{
 	"sessionID" : "sessionID",
-	"dataType" : "怎么表示要查询数据类型？后台确定一下，用字符串还是数字"
-},
-{
-	"start" : "start time",
-	"end" : "end time",
-	"description" : "description",
-	"plan_num" : "plan number"
-},
-{
-	"start" : "start time",
-	"end" : "end time",
-	"description" : "description",
-	"plan_num" : "plan number"
-}]
-```
-###Response post body
-*数据插入成功*
-```json
-{
-	"result" : true,//失败时为false
-	"sessionID" : "sessionID1234"
+~~	"dataType" : "怎么表示要查询数据类型？后台确定一下，用字符串还是数字"
+	"dataType" : "用字符串吧, 比如返回notes就用'note', 返回bill就用'bill', 返回plan就用'plan', 都用单数吧"
 }
 ```
 
@@ -168,9 +150,69 @@ post请求，数据用json格式发送
 ```
 ###Response post body
 *数据删除成功*
+1.向后台发送备忘录数据:
+```json
+[
+{
+	"sessionID" : "sessionID",
+	"dataType" : "dataType"
+},
+{
+	"content" : "content",
+	"time" : "time(转成字符串吧)"
+},
+{
+	"content" : "content",
+	"time" : "time(转成字符串吧)"
+}
+]
+```
+2.向后台发送账单数据:
+```json
+[
+{
+	"sessionID" : "sessionID",
+	"dataType" : "dataType"
+},
+{
+	"value" : "value",
+	"bill_description" : "bill_description",
+	"bill_type" : "bill_type",
+	"bill_time" : "bill_time(转成字符串吧)"
+},
+{
+	"value" : "value",
+	"bill_description" : "bill_description",
+	"bill_type" : "bill_type",
+	"bill_time" : "bill_time(转成字符串吧)"
+}
+]
+```
+3.向后台发送账单数据计划数据
+```json
+[
+{
+	"sessionID" : "sessionID",
+	"dataType" : "dataType"
+},
+{
+	"plan_num" : "plan number",
+	"start_date" : "start time",
+	"end_date" : "end time",
+	"description" : "description"
+},
+{
+	"plan_num" : "plan number",
+	"start_date" : "start time",
+	"end_date" : "end time",
+	"description" : "description"
+}
+]
+```
+###Response post body  
 ```json
 {
-	"result" : true,//失败时为false
-	"sessionID" : "sessionID1234"
+	"sessionID" : "sessionID",
+	"result" : true/false
 }
 ```

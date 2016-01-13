@@ -17,7 +17,8 @@ class ServerModel: NSObject {
     //登录，未测试
     static func login(userEmail: String, withPass userPassMD5: String) -> Bool {
         var isSuccessed = false
-        Alamofire.request(.POST, "http://localhost:8088/travel_helper/login", parameters: ["email": userEmail, "password": userPassMD5])
+        print("send http request....")
+        Alamofire.request(.POST, "http://10.0.1.32:8088/travel_helper/login", parameters: ["email": userEmail, "password": userPassMD5], encoding: .JSON)
             .responseJSON { response in
                 if let resultValue = response.result.value {
                     let json = JSON(resultValue)
@@ -44,7 +45,7 @@ class ServerModel: NSObject {
     //注册新用户，未测试
     static func registerNewUser(userName: String, gender: String, email: String, passMD5: String) -> Bool {
         var isSuccessed = false
-        Alamofire.request(.POST, "http://localhost:8088/travel_helper/register", parameters: ["userName:" : userName, "gender" : gender, "email" : email, "password" : passMD5])
+        Alamofire.request(.POST, "http://10.0.1.32:8088/travel_helper/register", parameters: ["userName:" : userName, "gender" : gender, "email" : email, "password" : passMD5], encoding: .JSON)
             .responseJSON { response in
                 if let resultValue = response.result.value {
                     let json = JSON(resultValue)
@@ -66,7 +67,7 @@ class ServerModel: NSObject {
     
     //获取用户数据，未测试
     static func getData(sessionID: String, withType dataType:DataType) -> [UserData] {
-        Alamofire.request(.POST, "http://localhost:8088/teavel_helper/data", parameters: ["sessionID": sessionID, "dataType": dataType.rawValue])
+        Alamofire.request(.POST, "http://10.0.1.32:8088/teavel_helper/data", parameters: ["sessionID": sessionID, "dataType": dataType.rawValue], encoding: .JSON)
             .responseJSON { response in
                 print("Request:\t\(response.request)")  // original URL request
                 print("Response:\t\(response.response)")// URL response
@@ -112,7 +113,7 @@ class ServerModel: NSObject {
         
         //在这里需要根据数据类型组装Request body
         
-        Alamofire.request(.POST, "http://localhost:8088/travel_helper/未确定", parameters: ["": ""])
+        Alamofire.request(.POST, "http://10.0.1.32:8088/travel_helper/未确定", parameters: ["": ""], encoding: .JSON)
             .responseJSON { response in
                 if let resultValue = response.result.value {
                     let json = JSON(resultValue)
@@ -141,7 +142,7 @@ class ServerModel: NSObject {
         var isSuccessed = false
         
         
-        Alamofire.request(.POST, "http://localhost:8088/travel_helper/未确定", parameters: ["": ""])
+        Alamofire.request(.POST, "http://10.0.1.32:8088/travel_helper/未确定", parameters: ["": ""], encoding: .JSON)
             .responseJSON { response in
                 if let resultValue = response.result.value {
                     let json = JSON(resultValue)
