@@ -9,13 +9,6 @@
 <meta name="description" content="Developed By M Abdur Rokib Promy">
 <meta name="keywords"
 	content="Admin, Bootstrap 3, Template, Theme, Responsive">
-<!-- <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-<link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-<link href="css/ionicons.min.css" rel="stylesheet" type="text/css" />
-<link href='http://fonts.googleapis.com/css?family=Lato'
-	rel='stylesheet' type='text/css'>
-<link href="css/style.css" rel="stylesheet" type="text/css" /> -->
-
 
 <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
@@ -29,7 +22,28 @@
 <link href="styles/iCheck/all.css" rel="stylesheet" type="text/css"/>
 <link href='http://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="styles/main.css">
+<link rel="stylesheet" href="styles/push.css">
 <!-- endbuild -->
+<script src='./bower_components/tinymce/tinymce.min.js'></script>
+<script src='scripts/push.js'></script>
+<script src='./bower_components/dropzone/dist/dropzone.js'></script>
+<script>
+  tinymce.init({
+    selector: '#myTextarea',
+    theme: 'modern',
+		width: 600,
+		height: 340,
+    plugins: [
+      'advlist autolink link image lists charmap print preview hr anchor pagebreak spellchecker',
+      'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',
+      'save table contextmenu directionality emoticons template paste textcolor'
+    ],
+    content_css: 'css/content.css',
+    toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print preview media fullpage | forecolor backcolor emoticons'
+  });
+  </script>
+
+
 </head>
 <body class="skin-black">
 	<header class="header">
@@ -276,7 +290,7 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-lg-6">
+					<div class="col-lg-6 left">
 						<section class="panel">
 							<header class="panel-heading"> Push Recommendation </header>
 							<div class="panel-body">
@@ -310,7 +324,17 @@
 							</div>
 						</section>
 					</div>
+					<div class="col-lg6 right">
+						 <textarea id="myTextarea">Hello, World!</textarea>
+						 <!-- <button class="btn btn-info" onclick="test()">Test</button> -->
+					</div>
+
 				</div>
+				<!-- <div class="upload-zone">
+					<form action="/file-upload/" method="post" enctype="multipart/form-data" class="dropzone" id="my-dropzone">
+						<input type="file" name="file" />
+					</form>
+				</div> -->
 			</section>
 			<div class="footer-main">Copyright &copy Director, 2014</div>
 		</aside>

@@ -1,0 +1,13 @@
+.left {
+  float: left;
+  min-width: 600px;
+}
+.right {
+  float: left;
+}
+
+#my-dropzone {
+  width: 500px;
+  height: 600px;
+  background-color: rgb(57, 68, 93);
+}
