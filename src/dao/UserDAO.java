@@ -23,9 +23,10 @@ public class UserDAO {
 				User user = new User();
 				user.setUserName(rs.getString("userName"));
 				user.setGender(rs.getString("gender"));
-				user.setMail(rs.getString("mail"));
+				user.setEmail(rs.getString("email"));
 				user.setPassword(rs.getString("password"));
 				user.setProfile(rs.getString("profile"));
+				user.setRegisterDate(rs.getString("registerDate"));
 				userList.add(user);
 			}
 			return userList;
@@ -69,9 +70,10 @@ public class UserDAO {
 			while(rs.next()) {
 				user.setUserName(rs.getString("userName"));
 				user.setGender(rs.getString("gender"));
-				user.setMail(rs.getString("mail"));
+				user.setEmail(rs.getString("email"));
 				user.setPassword(rs.getString("password"));
 				user.setProfile(rs.getString("profile"));
+				user.setRegisterDate(rs.getString("registerDate"));
 			}
 			return user;
 		} catch (Exception e) {
