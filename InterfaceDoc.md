@@ -225,7 +225,7 @@ post请求，数据用json格式发送
 ```json
 {
 	"sessionID" : "sessionID",
-	"result" : ture/false,
+	"dataType" : "tip",
 	"destination" : "destination"
 }
 ```
