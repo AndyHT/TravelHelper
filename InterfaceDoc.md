@@ -219,7 +219,7 @@ post请求，数据用json格式发送
 	"result" : ture/false
 }
 *数据删除成功*
-
+```
 ##请求tip
 ###Request post body
 ```json
