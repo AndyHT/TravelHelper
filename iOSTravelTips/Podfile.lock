@@ -1,11 +1,13 @@
 PODS:
   - Alamofire (3.1.4)
   - CryptoSwift (0.2.2)
+  - DGElasticPullToRefresh (1.0.3)
   - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
   - Alamofire (~> 3.0)
   - CryptoSwift (from `https://github.com/krzyzanowskim/CryptoSwift`, branch `master`)
+  - DGElasticPullToRefresh
   - SwiftyJSON
 
 EXTERNAL SOURCES:
@@ -21,6 +23,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Alamofire: fbc829692f351fa1d8a31dd75fd7f7f56fea31fb
   CryptoSwift: d382228d6301c09474132417878a741c2a2e68cd
+  DGElasticPullToRefresh: 040f39ae69840b3261d163fe6735c5901bf851e9
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
 COCOAPODS: 0.39.0

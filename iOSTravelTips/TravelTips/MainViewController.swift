@@ -17,7 +17,7 @@ class MainViewController: UIViewController {
        
         
         let data = ServerModel.getWeatherData(lat: 30.1, lon: 120.0)
-        print("City:\(data?["name"])")
+        print("City:\(data？["name"])")
     }
     @IBAction func sendMsg(sender: AnyObject) {
         ServerModel.login("1111@11.com", withPass: "111")//OK
