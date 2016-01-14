@@ -1,11 +1,13 @@
 package servlet;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -14,42 +16,32 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import util.MySessionContext;
+
 import com.google.gson.JsonObject;
 
-import dao.UserDAO;
-import entity.User;
-
-@WebServlet("/GetUserInfo")
-public class GetUserInfo extends HttpServlet {
+@WebServlet("/login")
+public class login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-    public GetUserInfo() {
-        // TODO Auto-generated constructor stub
+       
+    public login() {
+        super();
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html;charset=utf-8");
-		String userid = request.getParameter("userId");
-		int id = Integer.parseInt(userid);
-		PrintWriter out = response.getWriter();
-
-		response.setContentType("text/html");
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("get request...");
+		
+		response.setContentType("charset=utf-8");
 		response.setHeader("Cache-control", "no-cache, no-store");
 		response.setHeader("Pragma", "no-cache");
 		response.setHeader("Expires", "-1");
@@ -57,89 +49,98 @@ public class GetUserInfo extends HttpServlet {
 		response.setHeader("Access-Control-Allow-Methods", "POST");
 		response.setHeader("Access-Control-Allow-Headers", "Content-Type");
 		response.setHeader("Access-Control-Max-Age", "86400");
-
-		Gson gson = new Gson();
-		JsonObject myObj = new JsonObject();
 		
-		User user = getInfo(id);
-		JsonElement userObj = gson.toJsonTree(user);
+		PrintWriter out = response.getWriter();
+		/**
+		 * ÓÃ»§µÇÂ¼×Ö¶Î: userName, password
+		 */
+		String email = null;
+		String password = null;
 		
+		String jsonStr = readJSONString(request);
+		JSONObject obj = null;
+		System.out.println(jsonStr);
 		try {
-			if (user.getUserName() == null) {
-				myObj.addProperty("success", false);
-			} else {
-				myObj.addProperty("success", true);
-			}
-		} catch (Exception e) {
+			obj = new JSONObject(jsonStr);
+			email = obj.getString("email");
+			password = obj.getString("password");
+			
+		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-
-		myObj.add("user", userObj);
 		
+		JsonObject myObj = new JsonObject();
+//		out.print("receive....");
+		boolean confirm = confirmLogin(email, password);
+		if(confirm) {
+			myObj.addProperty("result", true);
+			HttpSession session = request.getSession();
+			
+			session.setAttribute("email", email);
+			MySessionContext.AddSession(session);
+			
+			String sessionID = session.getId();
+//			String sessionID = "111";
+			myObj.addProperty("sessionID", sessionID);
+		} else {
+			myObj.addProperty("result", false);
+		}
 		out.println(myObj.toString());
 		out.close();
 	}
 	
-	private User getInfo(int id) {
-
-		User user = new User();
-        Connection conn = null;            
+	private boolean confirmLogin(String email, String password) {
+		Connection conn = null;            
         PreparedStatement stmt = null;     
         String sql = null;
-
         try {      
             Context ctx = (Context) new InitialContext().lookup("java:comp/env");
             conn = ((DataSource) ctx.lookup("jdbc/mysql")).getConnection(); 
-
-            sql = "select * from user where user_id = ?"; 
+            
+            sql = "select email, password from user;";
             stmt = conn.prepareStatement(sql);
-            stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery(); 
-
             while(rs.next()){ 
-                user.setUserName(rs.getString("userName").trim());
-                user.setGender(rs.getString("gender").trim());
-                user.setMail(rs.getString("mail").trim());
-                user.setPassword(rs.getString("password").trim());
-                user.setProfile(rs.getString("profile").trim());
-            }                                                                         
-
-            rs.close();                                                               
-            stmt.close();                                                             
-            stmt = null;                                                              
-
-
-            conn.close();                                                             
-            conn = null;                                                   
-
-        }                                                               
-        catch(Exception e){System.out.println(e);}                      
-
+            	if (rs.getString(1).equals(email) && rs.getString(2).equals(password)) {
+            		return true;
+            	} 
+            }
+        } catch(Exception e){
+        	System.out.println(e);
+        }                      
         finally {                                                       
- 
             if (stmt != null) {                                            
                 try {                                                         
                     stmt.close();                                                
                 } catch (SQLException sqlex) {                                
-                    // ignore -- as we can't do anything about it here           
                 }                                                             
-
                 stmt = null;                                            
             }                                                        
-
             if (conn != null) {                                      
                 try {                                                   
                     conn.close();                                          
                 } catch (SQLException sqlex) {                          
-                    // ignore -- as we can't do anything about it here     
                 }                                                       
-
                 conn = null;                                            
             }                                                        
-        }              
+        } 
+        
+        return false;
 
-        return user;
+	}
 
-    }   
-
+	private String readJSONString(HttpServletRequest request){
+        StringBuffer json = new StringBuffer();
+        String line = null;
+        try {
+            BufferedReader reader = request.getReader();
+            while((line = reader.readLine()) != null) {
+                json.append(line);
+            }
+        }
+        catch(Exception e) {
+            System.out.println(e.toString());
+        }
+        return json.toString();
+    }
 }

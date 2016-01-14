@@ -4,20 +4,22 @@ public class User {
 	private String userName;
 	private String gender;
 	private String password;
-	private String mail;
+	private String email;
 	private String profile;
+	private String registerDate;
 
 	public User() {
 
 	}
 
-	public User(String userName, String gender, String password, String mail,
-			String profile) {
+	public User(String userName, String gender, String password, String email,
+			String profile, String registerDate) {
 		this.userName = userName;
 		this.gender = gender;
 		this.password = password;
-		this.mail = mail;
+		this.email = email;
 		this.profile = profile;
+		this.registerDate = registerDate;
 	}
 	
 	public String getUserName() {
@@ -44,12 +46,12 @@ public class User {
 		this.password = password;
 	}
 
-	public String getMail() {
-		return mail;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setMail(String mail) {
-		this.mail = mail;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getProfile() {
@@ -60,13 +62,13 @@ public class User {
 		this.profile = profile;
 	}
 
-	@Override
-	public String toString() {
-		return "User [userName=" + userName
-				+ ", gender=" + gender + ", password=" + password + ", mail="
-				+ mail + ", profile=" + profile + "]";
+	public String getRegisterDate() {
+		return registerDate;
+	}
+
+	public void setRegisterDate(String registerDate) {
+		this.registerDate = registerDate;
 	}
 
 	
-
 }

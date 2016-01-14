@@ -8,9 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		1D2B474C9B4DB18413C6FF56 /* Pods_TravelTips.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 847939B8A32A204D461001D0 /* Pods_TravelTips.framework */; };
+		3F20FB561C476329006BC447 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F20FB541C476329006BC447 /* Main.storyboard */; };
 		A44AE3D51C266F3E00E9A0E8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44AE3D41C266F3E00E9A0E8 /* AppDelegate.swift */; };
 		A44AE3D71C266F3E00E9A0E8 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44AE3D61C266F3E00E9A0E8 /* MainViewController.swift */; };
-		A44AE3DA1C266F3E00E9A0E8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A44AE3D81C266F3E00E9A0E8 /* Main.storyboard */; };
 		A44AE3DD1C266F3E00E9A0E8 /* TravelTips.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A44AE3DB1C266F3E00E9A0E8 /* TravelTips.xcdatamodeld */; };
 		A44AE3DF1C266F3E00E9A0E8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A44AE3DE1C266F3E00E9A0E8 /* Assets.xcassets */; };
 		A44AE3E21C266F3E00E9A0E8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A44AE3E01C266F3E00E9A0E8 /* LaunchScreen.storyboard */; };
@@ -43,12 +43,12 @@
 
 /* Begin PBXFileReference section */
 		1FB37BACD981C43DEF0A01C4 /* Pods-TravelTips.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelTips.release.xcconfig"; path = "Pods/Target Support Files/Pods-TravelTips/Pods-TravelTips.release.xcconfig"; sourceTree = "<group>"; };
+		3F20FB551C476329006BC447 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "../../../../My Programs/xcode workspace/TravelHelper/TravelHelper/Base.lproj/Main.storyboard"; sourceTree = "<group>"; };
 		448AE69611409CC49C5F9821 /* Pods-TravelTips.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelTips.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TravelTips/Pods-TravelTips.debug.xcconfig"; sourceTree = "<group>"; };
 		847939B8A32A204D461001D0 /* Pods_TravelTips.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TravelTips.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A44AE3D11C266F3E00E9A0E8 /* TravelTips.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravelTips.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A44AE3D41C266F3E00E9A0E8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A44AE3D61C266F3E00E9A0E8 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		A44AE3D91C266F3E00E9A0E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A44AE3DC1C266F3E00E9A0E8 /* TravelTips.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TravelTips.xcdatamodel; sourceTree = "<group>"; };
 		A44AE3DE1C266F3E00E9A0E8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A44AE3E11C266F3E00E9A0E8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -138,8 +138,8 @@
 				A44C456E1C3150E2003C6D7A /* Model */,
 				A44C456F1C31510B003C6D7A /* ViewController */,
 				A44AE3D41C266F3E00E9A0E8 /* AppDelegate.swift */,
-				A44AE3D81C266F3E00E9A0E8 /* Main.storyboard */,
 				A44AE3DE1C266F3E00E9A0E8 /* Assets.xcassets */,
+				3F20FB541C476329006BC447 /* Main.storyboard */,
 				A44AE3E01C266F3E00E9A0E8 /* LaunchScreen.storyboard */,
 				A44AE3E31C266F3E00E9A0E8 /* Info.plist */,
 				A44AE3DB1C266F3E00E9A0E8 /* TravelTips.xcdatamodeld */,
@@ -297,9 +297,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F20FB561C476329006BC447 /* Main.storyboard in Resources */,
 				A44AE3E21C266F3E00E9A0E8 /* LaunchScreen.storyboard in Resources */,
 				A44AE3DF1C266F3E00E9A0E8 /* Assets.xcassets in Resources */,
-				A44AE3DA1C266F3E00E9A0E8 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -416,10 +416,10 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		A44AE3D81C266F3E00E9A0E8 /* Main.storyboard */ = {
+		3F20FB541C476329006BC447 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				A44AE3D91C266F3E00E9A0E8 /* Base */,
+				3F20FB551C476329006BC447 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
