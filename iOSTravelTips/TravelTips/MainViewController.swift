@@ -4,7 +4,7 @@
 //
 //  Created by Teng on 12/20/15.
 //  Copyright © 2015 huoteng. All rights reserved.
-//  首页内容展示
+//  测试用
 
 import UIKit
 import Alamofire
@@ -16,11 +16,10 @@ class MainViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
        
         
-        let data = ServerModel.getWeatherData(lat: 30.1, lon: 120.0)
-        print("City:\(data?["name"])")
     }
     @IBAction func sendMsg(sender: AnyObject) {
-        ServerModel.login("1111@11.com", withPass: "111")//OK
+//        ServerModel.getWeatherData(city: "shanghai", country: "CN")
+//        ServerModel.login("1111@11.com", withPass: "111")//OK
 //        ServerModel.registerNewUser("Teng", gender: "male", email: "3456789", passMD5: "123456")//OK
 
     }

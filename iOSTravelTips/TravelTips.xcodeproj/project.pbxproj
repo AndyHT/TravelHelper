@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		1D2B474C9B4DB18413C6FF56 /* Pods_TravelTips.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 847939B8A32A204D461001D0 /* Pods_TravelTips.framework */; };
 		3F20FB5E1C4788BA006BC447 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F20FB5C1C4788BA006BC447 /* Main.storyboard */; };
+		A41EAAE61C47903500BFBB15 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41EAAE51C47903500BFBB15 /* WeatherViewController.swift */; };
+		A41EAAEA1C47964600BFBB15 /* NewDestinationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41EAAE91C47964600BFBB15 /* NewDestinationTableViewController.swift */; };
+		A41EAAEC1C479CE100BFBB15 /* DestinationResultTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41EAAEB1C479CE100BFBB15 /* DestinationResultTableViewController.swift */; };
+		A41EAAEE1C47B42300BFBB15 /* PlanTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41EAAED1C47B42300BFBB15 /* PlanTableViewController.swift */; };
 		A44AE3D51C266F3E00E9A0E8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44AE3D41C266F3E00E9A0E8 /* AppDelegate.swift */; };
 		A44AE3D71C266F3E00E9A0E8 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44AE3D61C266F3E00E9A0E8 /* MainViewController.swift */; };
 		A44AE3DD1C266F3E00E9A0E8 /* TravelTips.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A44AE3DB1C266F3E00E9A0E8 /* TravelTips.xcdatamodeld */; };
@@ -46,6 +50,10 @@
 		3F20FB5D1C4788BA006BC447 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		448AE69611409CC49C5F9821 /* Pods-TravelTips.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelTips.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TravelTips/Pods-TravelTips.debug.xcconfig"; sourceTree = "<group>"; };
 		847939B8A32A204D461001D0 /* Pods_TravelTips.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TravelTips.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A41EAAE51C47903500BFBB15 /* WeatherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
+		A41EAAE91C47964600BFBB15 /* NewDestinationTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewDestinationTableViewController.swift; sourceTree = "<group>"; };
+		A41EAAEB1C479CE100BFBB15 /* DestinationResultTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DestinationResultTableViewController.swift; sourceTree = "<group>"; };
+		A41EAAED1C47B42300BFBB15 /* PlanTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlanTableViewController.swift; sourceTree = "<group>"; };
 		A44AE3D11C266F3E00E9A0E8 /* TravelTips.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravelTips.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A44AE3D41C266F3E00E9A0E8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A44AE3D61C266F3E00E9A0E8 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -183,6 +191,10 @@
 				A44C45641C31504D003C6D7A /* LoginViewController.swift */,
 				A44C45681C315086003C6D7A /* SigninViewController.swift */,
 				A44AE3D61C266F3E00E9A0E8 /* MainViewController.swift */,
+				A41EAAE51C47903500BFBB15 /* WeatherViewController.swift */,
+				A41EAAE91C47964600BFBB15 /* NewDestinationTableViewController.swift */,
+				A41EAAEB1C479CE100BFBB15 /* DestinationResultTableViewController.swift */,
+				A41EAAED1C47B42300BFBB15 /* PlanTableViewController.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -373,12 +385,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				A44AE3DD1C266F3E00E9A0E8 /* TravelTips.xcdatamodeld in Sources */,
+				A41EAAE61C47903500BFBB15 /* WeatherViewController.swift in Sources */,
+				A41EAAEE1C47B42300BFBB15 /* PlanTableViewController.swift in Sources */,
+				A41EAAEA1C47964600BFBB15 /* NewDestinationTableViewController.swift in Sources */,
 				A44AE3D71C266F3E00E9A0E8 /* MainViewController.swift in Sources */,
 				A44C45691C315086003C6D7A /* SigninViewController.swift in Sources */,
 				A44AE3D51C266F3E00E9A0E8 /* AppDelegate.swift in Sources */,
 				A44C456D1C3150D9003C6D7A /* ServerModel.swift in Sources */,
 				A46406EF1C3BB88D00E9ECAA /* DataModel.swift in Sources */,
 				A44C456B1C3150C9003C6D7A /* LocalDBModel.swift in Sources */,
+				A41EAAEC1C479CE100BFBB15 /* DestinationResultTableViewController.swift in Sources */,
 				A44C45651C31504D003C6D7A /* LoginViewController.swift in Sources */,
 				A44C45631C314D9E003C6D7A /* AddNewDestViewController.swift in Sources */,
 			);

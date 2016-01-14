@@ -163,7 +163,7 @@ class ServerModel: NSObject {
         return isSuccessed
     }
     
-    //获取天气数据
+    //使用经纬度获取天气数据
     static func getWeatherData(lat lat: Double, lon: Double) {
         var weatherData:NSDictionary? = nil
         Alamofire.request(.GET, "http://api.openweathermap.org/data/2.5/weather", parameters: ["lat":lat, "lon":lon, "APPID": "1546641be462e54931b559ba73d938ce"])

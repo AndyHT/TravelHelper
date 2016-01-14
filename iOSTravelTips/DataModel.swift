@@ -34,5 +34,17 @@ class Note: UserData {
 }
 
 class Plan: UserData {
+    var destinationLat:Double
+    var destinationLon:Double
+    var destinationName:String
+    var startDate:NSDate
+    var endDate:NSDate
     
+    init(lat:Double, lon:Double, name:String, startDate:NSDate, endDate:NSDate) {
+        self.destinationLat = lat
+        self.destinationLon = lon
+        self.destinationName = name
+        self.startDate = startDate
+        self.endDate = endDate
+    }
 }
