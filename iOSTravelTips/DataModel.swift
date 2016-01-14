@@ -13,11 +13,11 @@ func encryptPassword(userPass: String) -> String {
     return userPass.md5()
 }
 
-enum DataType:Int {
-    case Bill = 1
-    case Note
-    case Plan
-    case Item
+enum DataType:String {
+    case Bill = "bill"
+    case Note = "note"
+    case Plan = "plan"
+    case Item = "item"
 }
 
 //通过继承实现泛化

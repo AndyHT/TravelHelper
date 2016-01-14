@@ -150,11 +150,49 @@ post请求，数据用json格式发送
 ###URL:http://localhost:8088/travel_helper/returnData/
 post请求，数据用json格式发送
 ###Request post body:
+1.向后台发送备忘录数据:
+```json
+{
+	"sessionID": "sessionID",
+	"dataType": "note",
+	"content": "note content"
+}
+```
+2.向后台发送账单数据:
 ```json
 {
 	"sessionID" : "sessionID",
-~~	"dataType" : "怎么表示要查询数据类型？后台确定一下，用字符串还是数字"
-	"dataType" : "用字符串吧, 比如返回notes就用'note', 返回bill就用'bill', 返回plan就用'plan', 都用单数吧"
+	"dataType" : "bill",
+	"value" : "content",
+	"bill_description": "description",
+	"bill_type": "type"
+}
+```
+3.向后台发送计划数据
+```json
+{
+	"sessionID" : "sessionID",
+	"dataType" : "plan"
+	"plan_num" : "plan number",
+	"start_date" : "start time",
+	"end_date" : "end time",
+	"description" : "description"
+}
+```
+4.向后台发送必备物品数据
+```json
+{
+	"sessionID" : "sessionID",
+	"dataType" : "dataType"
+	"item_description" : "item_description",
+	"item_num" : "item_num",
+	"item_name" : "item_name"
+}
+###Response post body  
+```json
+{
+	"sessionID" : "sessionID",
+	"result" : true/false
 }
 ```
 
@@ -182,66 +220,4 @@ post请求，数据用json格式发送
 	"result" : ture/false
 }
 *数据删除成功*
-1.向后台发送备忘录数据:
-```json
-[
-{
-	"sessionID" : "sessionID",
-	"dataType" : "dataType"
-},
-{
-	"content" : "content",
-	"time" : "time(转成字符串吧)"
-}
-]
-```
-2.向后台发送账单数据:
-```json
-[
-{
-	"sessionID" : "sessionID",
-	"dataType" : "dataType"
-},
-{
-	"value" : "value",
-	"bill_description" : "bill_description",
-	"bill_type" : "bill_type",
-	"bill_time" : "bill_time(转成字符串吧)"
-}
-]
-```
-3.向后台发送账单数据计划数据
-```json
-[
-{
-	"sessionID" : "sessionID",
-	"dataType" : "dataType"
-},
-{
-	"plan_num" : "plan number",
-	"start_date" : "start time",
-	"end_date" : "end time",
-	"description" : "description"
-}
-]
-```
-4.向后台发送必备物品数据
-```json
-[
-{
-	"sessionID" : "sessionID",
-	"dataType" : "dataType"
-},
-{
-	"item_description" : "item_description",
-	"item_num" : "item_num",
-	"item_name" : "item_name"
-}
-]
-###Response post body  
-```json
-{
-	"sessionID" : "sessionID",
-	"result" : true/false
-}
-```
+
