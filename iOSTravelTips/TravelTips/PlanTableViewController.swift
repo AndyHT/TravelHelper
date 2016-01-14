@@ -22,7 +22,7 @@ class PlanTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
         
-        planArr.append(Plan(lat: 120.0, lon: 30.0, name: "Shanghai", startDate: NSDate(), endDate: NSDate()))
+        planArr.append(Plan(lat: 30, lon: 120, name: "Shanghai", startDate: NSDate(), endDate: NSDate()))
     }
 
     override func didReceiveMemoryWarning() {
@@ -99,7 +99,7 @@ class PlanTableViewController: UITableViewController {
         if segue.identifier == "destinationSegue" {
             let vc = segue.destinationViewController as! WeatherViewController
             if let index = tableView.indexPathForSelectedRow {
-                
+                vc.destination = self.planArr[index.row]
             }
         
         }

@@ -9,6 +9,10 @@
 import UIKit
 import MapKit
 
+
+protocol SetWeatherInfoDelegate {
+    func setDestWeatherInfo(currentWeather: NSDictionary)
+}
 class WeatherViewController: UIViewController {
     
     var destination:Plan? = nil
@@ -22,13 +26,96 @@ class WeatherViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        print(destination)
+        self.destinationNameLabel.text = destination!.destinationName
+        self.startDateLabel.text = destination!.startDate.description
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let now = NSDate().timeIntervalSince1970
+        
+        let interval = now - (destination!.startDate.timeIntervalSince1970)
+        let leftDay = interval / 86400
+        countDownLabel.text = "\(Int(leftDay))"
+        print("interval:\(leftDay)")
+        
+        
+        ServerModel.getWeatherData(lat: destination!.destinationLat, lon: destination!.destinationLon) { (weatherInfo) -> Void in
+            //将数据填入Label
+            let sunriseTime = weatherInfo["sys"]?["sunrise"] as! Double
+            let sunsetTime = weatherInfo["sys"]?["sunset"] as! Double
+            
+            var isNight = false
+            
+            if (now < sunriseTime || now > sunsetTime) {
+                isNight = true
+            }
+            
+//            self.updateWeatherIcon((weatherInfo["weather"] as! NSArray)[0]["id"] as! Int, nightTime: isNight)
+            
+            self.weatherDescriptionLabel.text = (weatherInfo["weather"] as! NSArray)[0]["description"] as? String
+            let temp_min = (weatherInfo["main"]?["temp_min"] as! Double) - 273.15
+            let temp_max = (weatherInfo["main"]?["temp_max"] as! Double) - 273.15
+            
+            self.tempLabel.text = "\(temp_min)℃～\(temp_max)℃"
+        }
+    }
+    
+    
+    func updateWeatherIcon(condition: Int, nightTime: Bool) {
+        var imageName:String!
+        switch condition {
+        case 0..<300:
+            if nightTime {
+                imageName = ""
+            } else {
+                imageName = ""
+            }
+        case 300..<500:
+            imageName = ""
+        case 500..<600:
+            imageName = ""
+        case 600..<700:
+            imageName = ""
+        case 700..<771:
+            if nightTime {
+                imageName = ""
+            } else {
+                imageName = ""
+            }
+        case 771..<800:
+            if nightTime {
+                imageName = ""
+            } else {
+                imageName = ""
+            }
+        case 800..<804:
+            if nightTime {
+                imageName = ""
+            } else {
+                imageName = ""
+            }
+        case 804:
+            imageName = ""
+        case 900..<903, 905..<1000:
+            imageName = ""
+        case 903:
+            imageName = ""
+        case 904:
+            imageName = ""
+        default:
+            imageName = ""
+            print("in default")
+        }
+        
+        self.weatherImage.image = UIImage(named: imageName)
     }
     
 

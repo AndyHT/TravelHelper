@@ -164,32 +164,18 @@ class ServerModel: NSObject {
     }
     
     //使用经纬度获取天气数据
-    static func getWeatherData(lat lat: Double, lon: Double) {
-        var weatherData:NSDictionary? = nil
+    static func getWeatherData(lat lat: Double, lon: Double, callBack: (NSDictionary) -> Void) {
+        print("lat:\(lat),lon:\(lon)")
         Alamofire.request(.GET, "http://api.openweathermap.org/data/2.5/weather", parameters: ["lat":lat, "lon":lon, "APPID": "1546641be462e54931b559ba73d938ce"])
         .responseJSON { response in
             if let resultValue = response.result.value {
                 print("value:\(resultValue)")
                 let data = resultValue as! NSDictionary
                 //天气数据整理
-                if let countryName = data["sys"]?["country"] as? String {
-                    let keyStr = "country name condition sunrise sunset temp_max temp_min"
-                    let keyArr:NSArray = keyStr.componentsSeparatedByString(" ")
-                    let valueArr:NSArray = [
-                            countryName,
-                            (data["name"] as? String)!,
-                            (data["cod"] as? Int)!,
-                            (data["sys"]?["sunrise"] as? Int)!,
-                            (data["sys"]?["sunset"] as? Int)!,
-                            (data["main"]?["temp_max"] as? Int)!,
-                            (data["main"]?["temp_min"] as? Int)!
-                    ]
+                if let _ = data["sys"]?["country"] as? String {
                     
-                    weatherData = NSDictionary(objects: keyArr as [AnyObject], forKeys: valueArr as! [NSCopying])
-                    
-                    //在这里需要想办法将数据传回给View
-                    
-                    print("weatherData:\(weatherData)")
+                    //将数据传回给View
+                    callBack(data)
                 } else {
                     print("没有获取到天气数据")
                 }
