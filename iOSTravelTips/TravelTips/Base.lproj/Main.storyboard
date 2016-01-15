@@ -541,6 +541,9 @@
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="billListTableView" destination="NeM-3l-7sk" id="47a-JG-trG"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nEc-kv-gNA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -592,6 +595,9 @@
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="itemListTableView" destination="6p3-dg-ERI" id="MUr-ir-DgE"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TV4-zh-2Nu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -931,7 +937,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nr7-q8-WxE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="351.5" y="225.5"/>
+            <point key="canvasLocation" x="284.5" y="161.5"/>
         </scene>
         <!--Title-->
         <scene sceneID="zeS-ni-wi5">
