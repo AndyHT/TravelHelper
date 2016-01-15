@@ -22,7 +22,7 @@ class ItemListTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        itemArr.append(Item(id: 1, number: 1, desc: "lalal", name: "haha", time: NSDate()))
+//        itemArr.append(Item(id: 1, number: 1, desc: "lalal", name: "haha", time: NSDate()))
         
         let loadingView = DGElasticPullToRefreshLoadingViewCircle()
         loadingView.tintColor = UIColor(red: 78/255.0, green: 221/255.0, blue: 200/255.0, alpha: 1.0)
@@ -44,16 +44,15 @@ class ItemListTableViewController: UITableViewController {
         
         if itemArr.count == 0 {
             let dateFormatter = NSDateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            dateFormatter.dateFormat = "yyyy-MM-dd"
             
             if let sessionID = NSUserDefaults.standardUserDefaults().valueForKey("sessionID") as? String {
                 ServerModel.getData(sessionID, withType: DataType.Bill) { (items) -> Void in
-                    //将plan填入planArr，未完成
                     for index in 1..<items.count {
                         let id = items[index]["bill_id"].int!
                         let number = items[index]["value"].int!
                         let description = items[index]["bill_description"].string!
-                        let timeStr = items[index][""].string!
+                        let timeStr = items[index]["bill_time"].string!
                         let name = items[index]["bill_type"].string!
                         
                         let time = dateFormatter.dateFromString(timeStr)!
@@ -62,9 +61,8 @@ class ItemListTableViewController: UITableViewController {
                         
                         self.itemArr.append(newItem)
                     }
+                    self.itemListTableView.reloadData()
                 }
-                
-                
             } else {
                 print("没有获得session")
             }

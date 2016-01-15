@@ -78,7 +78,7 @@ class NewBillTableViewController: UITableViewController, SetBillTypeDelegate {
         //保存新账单到服务器
         let description = billDescriptionTextView.text!
         let value = Double(billValueTextField.text!)
-        if description != "" && value != nil && billType != nil && billDate != nil{
+        if description != "" && value != nil && billType != nil && billDate != nil {
             let sessionID = NSUserDefaults.standardUserDefaults().valueForKey("sessionID") as? String
             let dateFormat = NSDateFormatter()
             dateFormat.dateFormat = "yyyy-MM-dd"

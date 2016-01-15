@@ -24,7 +24,7 @@ class BillListTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        billArr.append(Bill(id: 0, value: 100.0, desc: "lalala", type: .Hotel, time: NSDate()))
+//        billArr.append(Bill(id: 0, value: 100.0, desc: "lalala", type: .Hotel, time: NSDate()))
         
         let loadingView = DGElasticPullToRefreshLoadingViewCircle()
         loadingView.tintColor = UIColor(red: 78/255.0, green: 221/255.0, blue: 200/255.0, alpha: 1.0)
@@ -48,12 +48,12 @@ class BillListTableViewController: UITableViewController {
         
         if billArr.count == 0 {
             let dateFormatter = NSDateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            dateFormatter.dateFormat = "yyyy-MM-dd"
             
             if let sessionID = NSUserDefaults.standardUserDefaults().valueForKey("sessionID") as? String {
                 ServerModel.getData(sessionID, withType: DataType.Bill) { (bills) -> Void in
-                    //将plan填入planArr，待测试
                     for index in 1..<bills.count {
+                        print("get bill data")
                         let id = bills[index]["bill_id"].int!
                         let value = bills[index]["value"].double!
                         let description = bills[index]["bill_description"].string!
@@ -69,6 +69,7 @@ class BillListTableViewController: UITableViewController {
                         
                         self.billArr.append(newBill)
                     }
+                    self.billListTableView.reloadData()
                 }
                 
                 
