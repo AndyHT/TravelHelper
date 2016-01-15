@@ -32,12 +32,12 @@ class TipListTableViewController: UITableViewController {
 //        tips.append(Tip(title: "在上海的日子", content: "不额的个月为婉无法无关瑜无违反有关违法美不饿恶服务有午饭晚饭", type: .diary, coverImgName: "mountain_in_fog"))
         
         let loadingView = DGElasticPullToRefreshLoadingViewCircle()
-        loadingView.tintColor = UIColor(red: 78/255.0, green: 221/255.0, blue: 200/255.0, alpha: 1.0)
+        loadingView.tintColor = UIColor(red: 255/255.0, green: 208/255.0, blue: 80/255.0, alpha: 1.0)
         refreshableTableView.dg_addPullToRefreshWithActionHandler ({ [weak self] () -> Void in
             print("Refreshing")
             self?.tableView.dg_stopLoading()
         }, loadingView: loadingView)
-        tableView.dg_setPullToRefreshFillColor(UIColor(red: 57/255.0, green: 67/255.0, blue: 89/255.0, alpha: 1.0))
+        tableView.dg_setPullToRefreshFillColor(UIColor(red: 59/255.0, green: 130/255.0, blue: 176/255.0, alpha: 1.0))
         tableView.dg_setPullToRefreshBackgroundColor(tableView.backgroundColor!)
         
     }
@@ -101,12 +101,10 @@ class TipListTableViewController: UITableViewController {
         
         let coverImgView = cell.viewWithTag(100) as! UIImageView
         let titleLabel = cell.viewWithTag(102) as! UILabel
-        let contentLabel = cell.viewWithTag(103) as! UILabel
         let typeImageView = cell.viewWithTag(101) as! UIImageView
         
         coverImgView.image = UIImage(named: tips[indexPath.row].coverImgName)
         titleLabel.text = tips[indexPath.row].title
-        contentLabel.text = tips[indexPath.row].content
         
         switch tips[indexPath.row].type {
         case .diary: typeImageView.image = UIImage(named: "weather09")

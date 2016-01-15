@@ -27,12 +27,12 @@ class BillListTableViewController: UITableViewController {
 //        billArr.append(Bill(id: 0, value: 100.0, desc: "lalala", type: .Hotel, time: NSDate()))
         
         let loadingView = DGElasticPullToRefreshLoadingViewCircle()
-        loadingView.tintColor = UIColor(red: 78/255.0, green: 221/255.0, blue: 200/255.0, alpha: 1.0)
+        loadingView.tintColor = UIColor(red: 255/255.0, green: 208/255.0, blue: 80/255.0, alpha: 1.0)
         billListTableView.dg_addPullToRefreshWithActionHandler ({ [weak self] () -> Void in
             print("Refreshing")
             self?.tableView.dg_stopLoading()
             }, loadingView: loadingView)
-        tableView.dg_setPullToRefreshFillColor(UIColor(red: 57/255.0, green: 67/255.0, blue: 89/255.0, alpha: 1.0))
+        tableView.dg_setPullToRefreshFillColor(UIColor(red: 59/255.0, green: 130/255.0, blue: 176/255.0, alpha: 1.0))
         tableView.dg_setPullToRefreshBackgroundColor(tableView.backgroundColor!)
 
     
@@ -105,7 +105,7 @@ class BillListTableViewController: UITableViewController {
         let descLabel = cell.viewWithTag(101) as! UILabel
         let typeImage = cell.viewWithTag(102) as! UIImageView
         
-        valueLabel.text = "\(billArr[indexPath.row].value)"
+        valueLabel.text = "－\(billArr[indexPath.row].value)"
         descLabel.text = "\(billArr[indexPath.row].descriptin)"
         switch billArr[indexPath.row].type {
         case .Food:
