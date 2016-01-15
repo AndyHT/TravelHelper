@@ -20,6 +20,26 @@ enum DataType:String {
     case Item = "item"
 }
 
+struct Tip {
+    let title:String
+    let content:String
+    let type:TipType
+    let coverImgName:String
+    init(title:String, content:String, type:TipType, coverImgName:String){
+        self.title = title
+        self.content = content
+        self.type = type
+        self.coverImgName = coverImgName
+    }
+}
+
+enum TipType: String{
+    case sceneIntro = "Attractions"
+    case skill = "Life skills"
+    case strategy = "Raiders"
+    case diary = "Travel notes"
+}
+
 //通过继承实现泛化
 class UserData {
     

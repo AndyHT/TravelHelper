@@ -58,7 +58,7 @@ class WeatherViewController: UIViewController {
                 isNight = true
             }
             
-//            self.updateWeatherIcon((weatherInfo["weather"] as! NSArray)[0]["id"] as! Int, nightTime: isNight)
+            self.updateWeatherIcon((weatherInfo["weather"] as! NSArray)[0]["id"] as! Int, nightTime: isNight)
             
             self.weatherDescriptionLabel.text = (weatherInfo["weather"] as! NSArray)[0]["description"] as? String
             let temp_min = (weatherInfo["main"]?["temp_min"] as! Double) - 273.15
@@ -74,44 +74,56 @@ class WeatherViewController: UIViewController {
         switch condition {
         case 0..<300:
             if nightTime {
-                imageName = ""
+                imageName = "thunder_moon"
             } else {
-                imageName = ""
+                imageName = "thunder_sun"
             }
         case 300..<500:
-            imageName = ""
+            if nightTime {
+                imageName = "light_rain_moon"
+            } else {
+                imageName = "light_rain_sun"
+            }
         case 500..<600:
-            imageName = ""
-        case 600..<700:
-            imageName = ""
+            if nightTime {
+                imageName = "shower_moon"
+            } else {
+                imageName = "shower_sun"
+            }
+        case 600..<700, 903:
+            if nightTime {
+                imageName = "snow_moon"
+            } else {
+                imageName = "snow_sun"
+            }
         case 700..<771:
             if nightTime {
-                imageName = ""
+                imageName = "fog_moon"
             } else {
-                imageName = ""
+                imageName = "fog_sun"
             }
-        case 771..<800:
+        case 771..<800, 904:
             if nightTime {
-                imageName = ""
+                imageName = "sunny_moon"
             } else {
-                imageName = ""
+                imageName = "sunny_sun"
             }
         case 800..<804:
             if nightTime {
-                imageName = ""
+                imageName = "cloudy_moon"
             } else {
-                imageName = ""
+                imageName = "cloudy_sun"
             }
         case 804:
-            imageName = ""
+            imageName = "overcast"
         case 900..<903, 905..<1000:
-            imageName = ""
-        case 903:
-            imageName = ""
-        case 904:
-            imageName = ""
+            if nightTime {
+                imageName = "thunder_moon"
+            } else {
+                imageName = "thunder_sun"
+            }
         default:
-            imageName = ""
+            imageName = "weather_not_known"
             print("in default")
         }
         

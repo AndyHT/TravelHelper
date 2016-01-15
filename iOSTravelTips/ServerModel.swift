@@ -72,39 +72,34 @@ class ServerModel: NSObject {
     }
     
     //获取用户数据，OK
-    static func getData(sessionID: String, withType dataType:DataType) -> [UserData] {
+    static func getData(sessionID: String, withType dataType:DataType, callback: (NSArray) -> Void) {
         print("send request...")
         
         
         Alamofire.request(.POST, "http://10.0.1.32:8088/travel_helper/data", parameters: ["sessionID": sessionID, "dataType": dataType.rawValue], encoding: .JSON)
             .responseJSON { response in
                 if let resultValue = response.result.value {
-                    let json = JSON(resultValue)
+                    let json = resultValue as! NSArray
                     
-                    let dataType = DataType(rawValue: json[0]["dataType"].string!)!
-                    
-                    switch dataType {
-                    case .Plan:
-                        print("拿到Plan，向本地数据库中写入Plan")
-                        //遍历数组，将数据打包后作为函数返回值返回
-                    case .Bill:
-                        print("拿到Bill，向本地数据库中写入Plan")
-                    case .Note:
-                        print("拿到Note，向本地数据库中写入Plan")
-                    case .Item:
-                        print("")
-                    }
-                    
-                    
-                    print("Result:\(json)")
-//                    print("Test:\(json[0]["dataType"].string)")
+                    callback(json)
                 } else {
                     //没有接收到response
                     print("未收到response")
                 }
         }
-        
-        return []
+    }
+    
+    static func getTips(sessionID: String, destination: String, callback: (NSArray) -> Void ) {
+        Alamofire.request(.POST, "http://10.0.1.32:8088/travel_helper/data", parameters: ["sessionID": sessionID, "dataType": "tip", "destination": destination], encoding: .JSON)
+            .responseJSON { response in
+                if let resultValue = response.result.value {
+                    let json = resultValue as! NSArray
+                    
+                    callback(json)
+                } else {
+                    print("没有拿到tips")
+                }
+        }
     }
     
     

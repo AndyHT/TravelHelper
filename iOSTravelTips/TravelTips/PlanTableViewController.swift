@@ -24,6 +24,16 @@ class PlanTableViewController: UITableViewController {
         
         planArr.append(Plan(lat: 30, lon: 120, name: "Shanghai", startDate: NSDate(), endDate: NSDate()))
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        let sessionID = NSUserDefaults.standardUserDefaults().valueForKey("sessionID") as! String
+        
+        
+        ServerModel.getData(sessionID, withType: DataType.Plan) { (plans) -> Void in
+            //将plan填入planArr
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
