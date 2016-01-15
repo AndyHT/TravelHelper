@@ -8,18 +8,23 @@
 
 import UIKit
 import MapKit
+import DatePickerCell
 
 class NewDestinationTableViewController: UITableViewController, SetDestinationDelegate, UITextFieldDelegate {
     
     var userDestination:MKMapItem? = nil
     @IBOutlet weak var cityNameInput: UITextField!
-    @IBOutlet weak var startDatePicker: UIDatePicker!
-    @IBOutlet weak var endDatePicker: UIDatePicker!
 
+    @IBOutlet weak var inputCell: UITableViewCell!
     @IBOutlet weak var startDateLabel: UILabel!
     @IBOutlet weak var endDateLabel: UILabel!
     
+    @IBOutlet weak var startDatePickerCell: DatePickerCell!
+    @IBOutlet weak var endDatePickerCell: DatePickerCell!
     
+//    var startDatePickerCell:DatePickerCell
+//    var endDatePickerCell:DatePickerCell
+    var cells:NSArray = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +35,24 @@ class NewDestinationTableViewController: UITableViewController, SetDestinationDe
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    
+        
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 44
+        
+        startDatePickerCell.leftLabel.text = "选择开始时间"
+        endDatePickerCell.leftLabel.text = "选择结束时间"
+        
+        startDatePickerCell.datePicker.datePickerMode = UIDatePickerMode.Date
+        endDatePickerCell.datePicker.datePickerMode = UIDatePickerMode.Date
+        
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "yyyy.MM.dd"
+        startDatePickerCell.rightLabel.text = formatter.stringFromDate(startDatePickerCell.date)
+        endDatePickerCell.rightLabel.text = formatter.stringFromDate(endDatePickerCell.date)
+        
+        cells = [[inputCell, startDatePickerCell, endDatePickerCell]]
+        
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -81,27 +104,35 @@ class NewDestinationTableViewController: UITableViewController, SetDestinationDe
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        let cell = self.tableView(tableView, cellForRowAtIndexPath: indexPath)
+        if cell.isKindOfClass(DatePickerCell) {
+            return (cell as! DatePickerCell).datePickerHeight()
+        }
+        return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
     }
-
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 6
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = self.tableView(tableView, cellForRowAtIndexPath: indexPath)
+        if cell.isKindOfClass(DatePickerCell) {
+            let datePickerTableViewCell = cell as! DatePickerCell
+            datePickerTableViewCell.selectedInTableView(tableView)
+            self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        }
     }
     
     @IBAction func saveDestination(sender: UIBarButtonItem) {
         
         
     }
-    /*override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 
         // Configure the cell...
 
-        return cell
-    }*/
+        return cells[indexPath.section][indexPath.row] as! UITableViewCell
+    }
 
 
     /*

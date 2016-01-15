@@ -203,7 +203,6 @@ post请求，数据用json格式发送
 ```json
 [{
 	"sessionID" : "sessionID",
-~~	"dataType" : "怎么表示要查询数据类型？后台确定一下，用字符串还是数字"
 	"dataType" : "用字符串吧, 比如删除notes就用'note', 删除bill就用'bill', 删除plan就用'plan', 删除item就用'item',都用单数吧"
 },
 {
@@ -220,4 +219,36 @@ post请求，数据用json格式发送
 	"result" : ture/false
 }
 *数据删除成功*
-
+```
+##请求tip
+###Request post body
+```json
+{
+	"sessionID" : "sessionID",
+	"dataType" : "tip",
+	"destination" : "destination"
+}
+```
+###Response post body
+```
+[{
+	"sessionID" : "sessionID",
+	"dataType" : "用字符串吧, 比如删除notes就用'note', 删除bill就用'bill', 删除plan就用'plan', 删除item就用'item',都用单数吧"
+},
+{
+	"id" : "id",
+	"content" :  "content",
+	"type" : "type",
+	"destination" :  "destination",
+	"time" : "time",
+	"picture" : "picture"
+},
+{
+	"id" : "id",
+	"content" :  "content",
+	"type" : "type",
+	"destination" :  "destination",
+	"time" : "time",
+	"picture" : "picture"
+}]
+```
