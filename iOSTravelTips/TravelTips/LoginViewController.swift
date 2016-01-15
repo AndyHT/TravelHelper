@@ -8,50 +8,45 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var logoImg: UIImageView!
     
     @IBOutlet weak var userNameTextField: UITextField!
     @IBOutlet weak var passWordTextField: UITextField!
     @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var registerButton: UIButton!
+    
     
     // Customer UI
-    let spinner = UIActivityIndicatorView(activityIndicatorStyle: .WhiteLarge)
+    let spinner = UIActivityIndicatorView(activityIndicatorStyle: .White)
     let warningMessage = UIImageView(image: UIImage(named: "Warning"))
     var loginPosition = CGPoint.zero
+    
+    // store the login button's vertical position in the view
+    var loginButtonPositionY:CGFloat = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
        
+        self.userNameTextField.delegate = self
+        self.passWordTextField.delegate = self
         
         self.logoImg.center.x -= self.view.bounds.width
-        
-        let paddingViewForUsername = UIView(frame: CGRectMake(0, 0, 44, self.userNameTextField.frame.height))
-        self.userNameTextField.leftView = paddingViewForUsername
-        self.userNameTextField.leftViewMode = .Always
-        
-        let paddingViewForPassword = UIView(frame: CGRectMake(0, 0, 44, self.passWordTextField.frame.height))
-        self.passWordTextField.leftView = paddingViewForPassword
-        self.passWordTextField.leftViewMode = .Always
-        
-        let userImageView = UIImageView(image: UIImage(named: "User"))
-        userImageView.frame.origin = CGPoint(x: 13, y: 10)
-        self.userNameTextField.addSubview(userImageView)
-        
-        let passwordImageView = UIImageView(image: UIImage(named: "Key"))
-        passwordImageView.frame.origin = CGPoint(x: 12, y: 9)
-        self.passWordTextField.addSubview(passwordImageView)
         
         self.userNameTextField.center.x -= self.view.bounds.width
         self.passWordTextField.center.x -= self.view.bounds.width
         
         self.loginPosition = self.loginButton.center
         self.loginButton.center.x -= self.view.bounds.width
+        self.registerButton.center.x -= self.view.bounds.width
         
         self.view.addSubview(self.warningMessage)
         self.warningMessage.hidden = true
         self.warningMessage.center = self.loginPosition
+        
+        loginButtonPositionY = self.loginButton.center.y
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -80,15 +75,18 @@ class LoginViewController: UIViewController {
             self.loginButton.center.x += self.view.bounds.width
             }, completion: nil)
         
+        UIView.animateWithDuration(0.4, delay: 0.9, options: .CurveEaseOut, animations: {
+            self.registerButton.center.x += self.view.bounds.width
+            }, completion: nil)
+        
     }
     
-  
     @IBAction func logInTapped(sender: AnyObject) {
         
         let username = userNameTextField.text
         let password = passWordTextField.text
         self.loginButton.addSubview(self.spinner)
-        self.spinner.frame.origin = CGPointMake(12, 12)
+        self.spinner.frame.origin = CGPointMake(9,7)
         self.spinner.startAnimating()
         if let name = username  {
             if  let pass = password {
@@ -112,7 +110,7 @@ class LoginViewController: UIViewController {
                                 self.loginButton.center.x += 30
                                 }, completion: {finished in
                                     UIView.animateWithDuration(0.3, animations: {
-                                        self.loginButton.center.y += 90
+                                        self.loginButton.center.y += 80
                                         self.spinner.removeFromSuperview()
                                         }, completion: { _ in
                                             UIView.transitionWithView(self.warningMessage,
@@ -132,6 +130,14 @@ class LoginViewController: UIViewController {
 
     }
     
+    func textFieldDidBeginEditing(textField: UITextField) {
+        self.warningMessage.hidden = true
+    }
+    
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        userNameTextField.resignFirstResponder()
+        passWordTextField.resignFirstResponder()
+    }
     
     
 }
