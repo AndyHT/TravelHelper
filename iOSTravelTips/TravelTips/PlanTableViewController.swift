@@ -24,7 +24,7 @@ class PlanTableViewController: UITableViewController {
         
 //        planArr.append(Plan(id: 1, lat: 30, lon: 120, name: "Shanghai", startDate: NSDate(), endDate: NSDate()))
     }
-    
+   
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         let sessionID = NSUserDefaults.standardUserDefaults().valueForKey("sessionID") as! String

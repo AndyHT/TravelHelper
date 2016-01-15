@@ -1,6 +1,7 @@
 PODS:
   - Alamofire (3.1.4)
   - CryptoSwift (0.2.2)
+  - CVCalendar (1.2.8)
   - DatePickerCell (1.0.4)
   - DGElasticPullToRefresh (1.0.3)
   - SwiftyJSON (2.3.2)
@@ -8,6 +9,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 3.0)
   - CryptoSwift (from `https://github.com/krzyzanowskim/CryptoSwift`, branch `master`)
+  - CVCalendar (~> 1.2.8)
   - DatePickerCell
   - DGElasticPullToRefresh
   - SwiftyJSON
@@ -25,6 +27,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Alamofire: fbc829692f351fa1d8a31dd75fd7f7f56fea31fb
   CryptoSwift: d382228d6301c09474132417878a741c2a2e68cd
+  CVCalendar: b7eda65b57b7ca6efae7c3d123a163882b3a3595
   DatePickerCell: 20d2ba8b5cd5bb8a5a79e2b43bc7758e3b65daf2
   DGElasticPullToRefresh: 040f39ae69840b3261d163fe6735c5901bf851e9
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a

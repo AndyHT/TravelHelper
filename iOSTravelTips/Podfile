@@ -6,6 +6,7 @@ target 'TravelTips' do
   pod 'SwiftyJSON'
   pod 'DGElasticPullToRefresh'
   pod 'DatePickerCell'
+  pod 'CVCalendar', '~> 1.2.8'
   pod 'CryptoSwift', :git => "https://github.com/krzyzanowskim/CryptoSwift", :branch => "master"
 end
 

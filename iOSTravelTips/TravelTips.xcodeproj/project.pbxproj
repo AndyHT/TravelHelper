@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1D2B474C9B4DB18413C6FF56 /* Pods_TravelTips.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 847939B8A32A204D461001D0 /* Pods_TravelTips.framework */; };
 		3F20FB5E1C4788BA006BC447 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3F20FB5C1C4788BA006BC447 /* Main.storyboard */; };
+		3F926CF31C492D1A005DF683 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F926CF21C492D1A005DF683 /* CalendarViewController.swift */; };
 		A41EAAE61C47903500BFBB15 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41EAAE51C47903500BFBB15 /* WeatherViewController.swift */; };
 		A41EAAEA1C47964600BFBB15 /* NewDestinationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41EAAE91C47964600BFBB15 /* NewDestinationTableViewController.swift */; };
 		A41EAAEC1C479CE100BFBB15 /* DestinationResultTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A41EAAEB1C479CE100BFBB15 /* DestinationResultTableViewController.swift */; };
@@ -54,6 +55,7 @@
 /* Begin PBXFileReference section */
 		1FB37BACD981C43DEF0A01C4 /* Pods-TravelTips.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelTips.release.xcconfig"; path = "Pods/Target Support Files/Pods-TravelTips/Pods-TravelTips.release.xcconfig"; sourceTree = "<group>"; };
 		3F20FB5D1C4788BA006BC447 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		3F926CF21C492D1A005DF683 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		448AE69611409CC49C5F9821 /* Pods-TravelTips.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TravelTips.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TravelTips/Pods-TravelTips.debug.xcconfig"; sourceTree = "<group>"; };
 		847939B8A32A204D461001D0 /* Pods_TravelTips.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TravelTips.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A41EAAE51C47903500BFBB15 /* WeatherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 				A4A8B6211C48FA8A0015434D /* NewBillTableViewController.swift */,
 				A4A8B6231C48FAA50015434D /* ItemListTableViewController.swift */,
 				A4A8B6251C48FAC70015434D /* NewItemTableViewController.swift */,
+				3F926CF21C492D1A005DF683 /* CalendarViewController.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -402,6 +405,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F926CF31C492D1A005DF683 /* CalendarViewController.swift in Sources */,
 				A4A8B6261C48FAC70015434D /* NewItemTableViewController.swift in Sources */,
 				A44AE3DD1C266F3E00E9A0E8 /* TravelTips.xcdatamodeld in Sources */,
 				A41EAAE61C47903500BFBB15 /* WeatherViewController.swift in Sources */,
