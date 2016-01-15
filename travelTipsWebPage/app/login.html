@@ -30,16 +30,17 @@
 
     <div class="container">
 
-      <form class="form-signin">
+      <form class="form-signin" id="form-signin">
         <h2 class="form-signin-heading">Please log in</h2>
         <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus><p id="result1"></p>
         <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required><p id="resutl2"></p>
         <button class="btn btn-lg btn-primary btn-block" type="submit" id="login-btn">Sign in</button>
+        <p id="loginResult"></p>
       </form>
-
     </div> <!-- /container -->
+    <script src="/bower_components/jquery/dist/jquery.js"></script>
     <script src="scripts/login.js"></script>
   </body>
 </html>

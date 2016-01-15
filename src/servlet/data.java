@@ -32,7 +32,9 @@ import entity.Bill;
 import entity.Item;
 import entity.Note;
 import entity.Schedule;
+import entity.Tip;
 import entity.User;
+import util.DBHelper;
 import util.MySessionContext;
 
 @WebServlet("/data")
@@ -81,7 +83,6 @@ public class data extends HttpServlet {
 			sessionID = obj.getString("sessionID");
 			System.out.println(dataType + "&&&" + sessionID);
 			HttpSession session = MySessionContext.getSession(sessionID);
-			System.out.println(session.toString());
 			email = (String) session.getAttribute("email");
 			System.out.println(email);
 			
@@ -151,7 +152,9 @@ public class data extends HttpServlet {
 							myObj.addProperty("start", s.getStrat_date());
 							myObj.addProperty("end", s.getEnd_date());
 							myObj.addProperty("destination", s.getDestination());
-							myObj.addProperty("picture", s.getPicture());
+							myObj.addProperty("latitude", s.getLatitude());
+							myObj.addProperty("longitude", s.getLongitude());
+//							myObj.addProperty("picture", s.getPicture());
 							jsonArr.add(myObj);
 						}
 						out.println(jsonArr);
@@ -169,6 +172,41 @@ public class data extends HttpServlet {
 							myObj.addProperty("item_name", s.getItem_name());
 							jsonArr.add(myObj);
 						}
+						out.println(jsonArr);
+					}
+					else if (dataType.equals("tip")) {
+						/**
+						 * 根据destination获取推荐
+						 */
+						String destination = obj.getString("destination");
+						if (destination != null) {
+							ArrayList<Tip> tip = getData.GetTip(destination);
+							for (Tip t : tip) {
+								JsonObject myObj = new JsonObject();
+								myObj.addProperty("id", t.getId());
+								myObj.addProperty("content", t.getContent());
+								myObj.addProperty("type", t.getType());
+								myObj.addProperty("destination", t.getDestination());
+								myObj.addProperty("time", t.getTime());
+								myObj.addProperty("picture", t.getPicture());
+								myObj.addProperty("title", t.getTitle());
+								jsonArr.add(myObj);
+							}
+						} else {
+							ArrayList<Tip> tip = getData.GetAllTips();
+							for (Tip t : tip) {
+								JsonObject myObj = new JsonObject();
+								myObj.addProperty("id", t.getId());
+								myObj.addProperty("content", t.getContent());
+								myObj.addProperty("type", t.getType());
+								myObj.addProperty("destination", t.getDestination());
+								myObj.addProperty("time", t.getTime());
+								myObj.addProperty("picture", t.getPicture());
+								myObj.addProperty("title", t.getTitle());
+								jsonArr.add(myObj);
+							}
+						}
+						
 						out.println(jsonArr);
 					}
 				}
@@ -189,6 +227,7 @@ public class data extends HttpServlet {
 			Context ctx = (Context) new InitialContext()
 					.lookup("java:comp/env");
 			conn = ((DataSource) ctx.lookup("jdbc/mysql")).getConnection();
+//			conn = DBHelper.getConnection();
 
 			sql = "select userID from user where email = ?;";
 			stmt = conn.prepareStatement(sql);
@@ -226,6 +265,7 @@ public class data extends HttpServlet {
 		return id;
 
 	}
+	
 	
 	private String readJSONString(HttpServletRequest request){
         StringBuffer json = new StringBuffer();

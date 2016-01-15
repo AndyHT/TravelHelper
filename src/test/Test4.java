@@ -8,8 +8,8 @@ import util.DBHelper;
 
 public class Test4 {
 	public static void main(String[]args) {
-		String email = "2222@22.com";
-		int id = 0;
+//		String email = "2222@22.com";
+//		int id = 0;
 		Connection conn = null;            
 	    PreparedStatement stmt = null;   
 	    ResultSet rs = null;
@@ -18,18 +18,19 @@ public class Test4 {
 	    try {      
 	    	conn = DBHelper.getConnection();
 	    	if (conn != null) {
-	    		sql = "select userID from user where email=?;";
+	    		sql = "select * from tip;";
 	    		
 	            stmt = conn.prepareStatement(sql);
-	            stmt.setString(1, email);
+//	            stmt.setString(1, email);
 	            rs = stmt.executeQuery(); 
 	
 	            while(rs.next()){ 
-	                id = rs.getInt(1);
+//	                id = rs.getInt(1);
+	            	System.out.println(rs.getString("content"));
 	            }                   
 	    		
 	    	}
-	    	System.out.println(id);
+//	    	System.out.println(id);
 	        rs.close();                                                               
 	        stmt.close();                                                             
 	        stmt = null;                                                              

@@ -35,11 +35,13 @@ public class returnData extends HttpServlet {
         super();
     }
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
 		doPost(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+			throws ServletException, IOException {
 		response.setContentType("charset=utf-8");
 		response.setHeader("Cache-control", "no-cache, no-store");
 		response.setHeader("Pragma", "no-cache");
@@ -71,15 +73,16 @@ public class returnData extends HttpServlet {
 			sessionID = obj.getString("sessionID");
 			HttpSession session = MySessionContext.getSession(sessionID);
 			String email = (String) session.getAttribute("email");
+			
 			flag = getIdByEmail(email);
 			myObj.addProperty("sessionID", sessionID);
 			if (dataType.equals("bill")) {
 				double value = obj.getDouble("value");
 				String bill_description = obj.getString("bill_description");
 				String bill_type = obj.getString("bill_type");
-//				String bill_time = obj.getString("bill_time");
+				String bill_time = obj.getString("bill_time");
 				
-				result = insertBill(value, bill_description, bill_type, createDate, flag); 
+				result = insertBill(value, bill_description, bill_type, bill_time, flag); 
 				
 				if (result) {
 					myObj.addProperty("result", true);
@@ -109,9 +112,15 @@ public class returnData extends HttpServlet {
 				String start_date = obj.getString("start_date");
 				String end_date = obj.getString("end_date");
 				String destination = obj.getString("destination");
-				String picture = obj.getString("picture");
+				double latitude = obj.getDouble("latitude");
+				double longitude = obj.getDouble("longitude");
+//				String picture = obj.getString("picture");
 				
-				result = insertPlan(picture, start_date, end_date, destination, flag);
+				String picture = getPic(destination);
+				if (picture == null) {
+					picture = null;
+				}
+				result = insertPlan(start_date, end_date, destination, latitude, longitude, flag, picture);
 				
 				if (result) {
 //					myObj.addProperty("sessionID", sessionID);
@@ -122,12 +131,12 @@ public class returnData extends HttpServlet {
 				}
 				out.println(myObj);
 			} else if (dataType.equals("item")) {
-//				String item_time = obj.getString("item_time");
+				String item_time = obj.getString("item_time");
 				String item_description = obj.getString("item_description");
 				int item_num = obj.getInt("item_num");
 				String item_name = obj.getString("item_name");
 				
-				result = insertItem(createDate, item_description, item_num, item_name, flag);
+				result = insertItem(item_time, item_description, item_num, item_name, flag);
 				
 				if (result) {
 //					myObj.addProperty("sessionID", sessionID);
@@ -259,7 +268,7 @@ public class returnData extends HttpServlet {
 
 	}
 	
-	private boolean insertPlan(String start_date, String end_date, String destination, String picture, int flag) {
+	private boolean insertPlan(String start_date, String end_date, String destination, double latitude, double longitude, int flag, String picture) {
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		String sql = null;
@@ -268,13 +277,15 @@ public class returnData extends HttpServlet {
 					.lookup("java:comp/env");
 			conn = ((DataSource) ctx.lookup("jdbc/mysql")).getConnection();
 
-			sql = "insert into note (plan_num, start_date, end_date, description, flag) values (?, ?, ?, ?, ?);";
+			sql = "insert into note (start_date, end_date, description, latitude, longitude, flag, picture) values (?, ?, ?, ?, ?, ?, ?);";
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, start_date);
 			stmt.setString(2, end_date);
 			stmt.setString(3, destination);
-			stmt.setString(4, picture);
-			stmt.setInt(5, flag);
+			stmt.setDouble(4, latitude);
+			stmt.setDouble(5, longitude);
+			stmt.setInt(6, flag);
+			stmt.setString(6, picture);
 
 			int i = stmt.executeUpdate();
 			if (i != 0) {
@@ -403,6 +414,53 @@ public class returnData extends HttpServlet {
 		}
 		return id;
 
+	}
+	
+	private String getPic(String destination) {
+		String picture = null;
+		Connection conn = null;
+		PreparedStatement stmt = null;
+		String sql = null;
+		ResultSet rs = null;
+		try {
+			Context ctx = (Context) new InitialContext()
+					.lookup("java:comp/env");
+			conn = ((DataSource) ctx.lookup("jdbc/mysql")).getConnection();
+
+			sql = "select pic from picture where destination = ?;";
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, destination);
+			
+			rs = stmt.executeQuery();
+			
+			while (rs.next()) {
+				picture = rs.getString(1);
+			}	
+
+			stmt.close();
+			stmt = null;
+			conn.close();
+			conn = null;
+
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException sqlex) {
+				}
+				stmt = null;
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException sqlex) {
+				}
+				conn = null;
+			}
+		}
+		return picture;
 	}
 
 }

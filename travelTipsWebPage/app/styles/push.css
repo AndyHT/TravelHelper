@@ -1,9 +1,10 @@
 .left {
   float: left;
-  min-width: 600px;
+  min-width: 400px;
 }
 .right {
-  float: left;
+  /*float: right;*/
+  margin-left: 0;
 }
 
 #my-dropzone {
