@@ -27,12 +27,12 @@ class PlanTableViewController: UITableViewController {
         planArr.append(Plan(id: 1, lat: 30, lon: 120, name: "Shanghai", startDate: NSDate(), endDate: NSDate()))
         
         let loadingView = DGElasticPullToRefreshLoadingViewCircle()
-        loadingView.tintColor = UIColor(red: 78/255.0, green: 221/255.0, blue: 200/255.0, alpha: 1.0)
+        loadingView.tintColor = UIColor(red: 255/255.0, green: 208/255.0, blue: 80/255.0, alpha: 1.0)
         planTableView.dg_addPullToRefreshWithActionHandler ({ [weak self] () -> Void in
             print("Refreshing")
             self?.tableView.dg_stopLoading()
             }, loadingView: loadingView)
-        tableView.dg_setPullToRefreshFillColor(UIColor(red: 57/255.0, green: 67/255.0, blue: 89/255.0, alpha: 1.0))
+        tableView.dg_setPullToRefreshFillColor(UIColor(red: 59/255.0, green: 130/255.0, blue: 176/255.0, alpha: 1.0))
         tableView.dg_setPullToRefreshBackgroundColor(tableView.backgroundColor!)
 
         
@@ -114,7 +114,11 @@ class PlanTableViewController: UITableViewController {
         let startDateLabel = cell.viewWithTag(101) as! UILabel
         
         titleLabel.text = planArr[indexPath.row].destinationName
-        startDateLabel.text = planArr[indexPath.row].startDate.description
+        
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "yyyy.MM.dd"
+        let startDateText = formatter.stringFromDate(planArr[indexPath.row].startDate)
+        startDateLabel.text = startDateText
 
         return cell
     }
