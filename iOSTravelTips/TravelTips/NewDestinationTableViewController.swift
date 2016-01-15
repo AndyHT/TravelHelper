@@ -20,8 +20,6 @@ class NewDestinationTableViewController: UITableViewController, SetDestinationDe
     @IBOutlet weak var startDatePickerCell: DatePickerCell!
     @IBOutlet weak var endDatePickerCell: DatePickerCell!
     
-//    var startDatePickerCell:DatePickerCell
-//    var endDatePickerCell:DatePickerCell
     var cells:NSArray = []
     
     override func viewDidLoad() {

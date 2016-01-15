@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="90u-J8-QFR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="90u-J8-QFR">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -151,11 +151,11 @@
             </objects>
             <point key="canvasLocation" x="1438.5" y="225.5"/>
         </scene>
-        <!--Title-->
+        <!--新增消费条目-->
         <scene sceneID="NG2-2B-O8z">
             <objects>
                 <tableViewController id="TUx-xG-D64" customClass="NewBillTableViewController" customModule="TravelTips" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="4CE-3l-bk9">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="static" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="4CE-3l-bk9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -215,7 +215,6 @@
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5ia-hF-wEL">
                                                     <rect key="frame" x="318" y="5" width="49" height="46"/>
-                                                    <color key="backgroundColor" red="1" green="0.1633848977" blue="0.15517832940000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="选择消费类型" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i6D-0D-hf3">
                                                     <rect key="frame" x="8" y="18" width="102" height="21"/>
@@ -229,60 +228,12 @@
                                             <segue destination="Bx3-4R-m2R" kind="show" identifier="setBillType" id="ZfL-RM-OiQ"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="VNT-4J-Gcf">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="VNT-4J-Gcf" customClass="DatePickerCell" customModule="DatePickerCell">
                                         <rect key="frame" x="0.0" y="359" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VNT-4J-Gcf" id="cLR-Yx-Fa3">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="选择消费时间" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kdA-b3-uWc">
-                                                    <rect key="frame" x="8" y="11" width="102" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2016.3.13" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O1p-iN-Fnt">
-                                                    <rect key="frame" x="284" y="11" width="74" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="166" id="a4R-RC-BRa">
-                                        <rect key="frame" x="0.0" y="403" width="375" height="166"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="a4R-RC-BRa" id="XTn-wn-ccE">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="166"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="FPG-gW-WNB">
-                                                    <rect key="frame" x="15" y="0.0" width="345" height="166"/>
-                                                    <date key="date" timeIntervalSinceReferenceDate="474356998.48159999">
-                                                        <!--2016-01-13 05:49:58 +0000-->
-                                                    </date>
-                                                </datePicker>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="164" id="nGQ-RK-DaU">
-                                        <rect key="frame" x="0.0" y="569" width="375" height="164"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="nGQ-RK-DaU" id="S7K-AF-jqZ">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="164"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tpt-yQ-5ns">
-                                                    <rect key="frame" x="103" y="50" width="30" height="30"/>
-                                                    <state key="normal" title="完成"/>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ip-Jt-MPO">
-                                                    <rect key="frame" x="224" y="50" width="30" height="30"/>
-                                                    <state key="normal" title="取消"/>
-                                                </button>
-                                            </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
@@ -294,7 +245,7 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Title" id="AVu-Sz-S8t">
+                    <navigationItem key="navigationItem" title="新增消费条目" id="AVu-Sz-S8t">
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="s5z-lS-9pF">
                             <connections>
                                 <action selector="saveNewBillTapped:" destination="TUx-xG-D64" id="dSs-Qi-nbp"/>
@@ -304,14 +255,19 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="billDescriptionCell" destination="StW-Yx-whM" id="tRB-Rd-PdR"/>
                         <outlet property="billDescriptionTextView" destination="2ky-Fn-SOh" id="com-ql-zQi"/>
+                        <outlet property="billSumCell" destination="fWo-7a-cu8" id="6Eq-Ig-aKr"/>
+                        <outlet property="billTimeCell" destination="VNT-4J-Gcf" id="xsX-2b-ogr"/>
+                        <outlet property="billTypeCell" destination="eqo-tx-JlO" id="r7e-sn-Rjd"/>
                         <outlet property="billTypeImageView" destination="5ia-hF-wEL" id="4yv-4Y-vfq"/>
                         <outlet property="billValueTextField" destination="aqS-k7-02o" id="TZN-jT-sJD"/>
+                        <outlet property="newBillTableView" destination="4CE-3l-bk9" id="1Lr-Oh-bT2"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zyw-Yu-ckS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="950.5" y="1222.5"/>
+            <point key="canvasLocation" x="914.5" y="1230.5"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="EFY-fd-dl7">
@@ -554,7 +510,6 @@
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" tag="102" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="R2x-hp-gPU">
                                             <rect key="frame" x="318" y="3" width="49" height="46"/>
-                                            <color key="backgroundColor" red="1" green="0.1633848977" blue="0.15517832940000001" alpha="1" colorSpace="calibratedRGB"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="- 39.40" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E07-yq-N3P">
                                             <rect key="frame" x="20" y="16" width="58" height="21"/>
@@ -642,11 +597,11 @@
             </objects>
             <point key="canvasLocation" x="351.5" y="2027.5"/>
         </scene>
-        <!--New Item Table View Controller-->
+        <!--新增物品-->
         <scene sceneID="Tgx-CJ-BSY">
             <objects>
                 <tableViewController id="Thg-AA-Fw5" customClass="NewItemTableViewController" customModule="TravelTips" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="fN2-ni-4Fh">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="static" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="fN2-ni-4Fh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -697,66 +652,12 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="40" id="w7d-1X-Bam">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="40" id="w7d-1X-Bam" customClass="DatePickerCell" customModule="DatePickerCell">
                                         <rect key="frame" x="0.0" y="303" width="375" height="40"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="w7d-1X-Bam" id="fXf-D7-iwP">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="选择使用时间：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sIc-2R-LwG">
-                                                    <rect key="frame" x="16" y="8" width="119" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2016.03.09" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dYk-YQ-RAY">
-                                                    <rect key="frame" x="280" y="10" width="87" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="163" id="147-ce-Byg">
-                                        <rect key="frame" x="0.0" y="343" width="375" height="163"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="147-ce-Byg" id="ig3-da-xar">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="163"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="yBQ-Pn-KRM">
-                                                    <rect key="frame" x="14" y="0.0" width="346" height="158"/>
-                                                    <date key="date" timeIntervalSinceReferenceDate="474361111.76042199">
-                                                        <!--2016-01-13 06:58:31 +0000-->
-                                                    </date>
-                                                </datePicker>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="233" id="8eQ-kn-fGR">
-                                        <rect key="frame" x="0.0" y="506" width="375" height="233"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8eQ-kn-fGR" id="a7g-Pq-OAs">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="233"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XDH-Hm-bbf">
-                                                    <rect key="frame" x="90" y="35" width="30" height="30"/>
-                                                    <state key="normal" title="完成"/>
-                                                    <connections>
-                                                        <action selector="saveNewItem:" destination="Thg-AA-Fw5" eventType="touchUpInside" id="Djv-J7-hqm"/>
-                                                    </connections>
-                                                </button>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lfB-wv-A2Q">
-                                                    <rect key="frame" x="245" y="35" width="30" height="30"/>
-                                                    <state key="normal" title="取消"/>
-                                                    <connections>
-                                                        <action selector="cancelSaved:" destination="Thg-AA-Fw5" eventType="touchUpInside" id="hs0-tq-Fvh"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
@@ -767,15 +668,22 @@
                             <outlet property="delegate" destination="Thg-AA-Fw5" id="s7w-4M-4vh"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="新增物品" id="rvd-Rp-dOH">
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="KhI-Jp-vc6"/>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="itemDescTextView" destination="21A-Z5-Kda" id="bAJ-Sb-oPO"/>
+                        <outlet property="itemDescriptionCell" destination="eZ5-A7-D4C" id="Jks-0j-JZz"/>
+                        <outlet property="itemNameCell" destination="8VO-1Z-c4O" id="49h-Oe-Wqz"/>
                         <outlet property="itemNameTextField" destination="r2c-h0-cgk" id="mNb-4v-Bga"/>
+                        <outlet property="itemTimeCell" destination="w7d-1X-Bam" id="L3y-4I-55o"/>
+                        <outlet property="newItemTableView" destination="fN2-ni-4Fh" id="uN8-Td-yX0"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MtN-oI-DeZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="950.5" y="2027.5"/>
+            <point key="canvasLocation" x="1200.5" y="2078.5"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="lua-bA-THl">

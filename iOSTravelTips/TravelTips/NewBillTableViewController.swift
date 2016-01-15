@@ -7,15 +7,24 @@
 //
 
 import UIKit
+import DatePickerCell
 
 class NewBillTableViewController: UITableViewController, SetBillTypeDelegate {
 
     @IBOutlet weak var billDescriptionTextView: UITextView!
     @IBOutlet weak var billValueTextField: UITextField!
     @IBOutlet weak var billTypeImageView: UIImageView!
+    @IBOutlet weak var billSumCell: UITableViewCell!
+    @IBOutlet weak var billDescriptionCell: UITableViewCell!
+    @IBOutlet weak var billTimeCell: DatePickerCell!
+    @IBOutlet weak var billTypeCell: UITableViewCell!
+    
+    @IBOutlet var newBillTableView: UITableView!
+    
+    
     var billType: BillType? = nil
     var billDate: NSDate? = NSDate()
-    
+    var cells:NSArray = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +34,19 @@ class NewBillTableViewController: UITableViewController, SetBillTypeDelegate {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        self.newBillTableView.rowHeight = UITableViewAutomaticDimension
+        self.newBillTableView.estimatedRowHeight = 44
+        
+        self.billTimeCell.leftLabel.text = "选择消费时间"
+        self.billTimeCell.datePicker.datePickerMode = UIDatePickerMode.Date
+        
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = "yyyy.MM.dd"
+        self.billTimeCell.rightLabel.text = formatter.stringFromDate(self.billTimeCell.date)
+        
+        cells = [[billDescriptionCell, billSumCell, billTypeCell, billTimeCell]]
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -90,7 +112,31 @@ class NewBillTableViewController: UITableViewController, SetBillTypeDelegate {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 6
+        return 4
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        let cell = self.tableView(tableView, cellForRowAtIndexPath: indexPath)
+        if cell.isKindOfClass(DatePickerCell) {
+            return (cell as! DatePickerCell).datePickerHeight()
+        }
+        return super.tableView(tableView, heightForRowAtIndexPath: indexPath)
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let cell = self.tableView(tableView, cellForRowAtIndexPath: indexPath)
+        if cell.isKindOfClass(DatePickerCell) {
+            let datePickerTableViewCell = cell as! DatePickerCell
+            datePickerTableViewCell.selectedInTableView(tableView)
+            self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        }
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        // Configure the cell...
+        
+        return cells[indexPath.section][indexPath.row] as! UITableViewCell
     }
 
     /*
