@@ -26,6 +26,10 @@
 		A44C456B1C3150C9003C6D7A /* LocalDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44C456A1C3150C9003C6D7A /* LocalDBModel.swift */; };
 		A44C456D1C3150D9003C6D7A /* ServerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44C456C1C3150D9003C6D7A /* ServerModel.swift */; };
 		A46406EF1C3BB88D00E9ECAA /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A46406EE1C3BB88D00E9ECAA /* DataModel.swift */; };
+		A4A8B6201C48FA270015434D /* BillListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A8B61F1C48FA270015434D /* BillListTableViewController.swift */; };
+		A4A8B6221C48FA8A0015434D /* NewBillTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A8B6211C48FA8A0015434D /* NewBillTableViewController.swift */; };
+		A4A8B6241C48FAA50015434D /* ItemListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A8B6231C48FAA50015434D /* ItemListTableViewController.swift */; };
+		A4A8B6261C48FAC70015434D /* NewItemTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4A8B6251C48FAC70015434D /* NewItemTableViewController.swift */; };
 		A4E07E131C47EF71006B8C06 /* TipDetailWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4E07E121C47EF71006B8C06 /* TipDetailWebView.swift */; };
 		A4FA704C1C47C33000ED63EC /* TipListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4FA704B1C47C33000ED63EC /* TipListTableViewController.swift */; };
 /* End PBXBuildFile section */
@@ -75,6 +79,10 @@
 		A44C456A1C3150C9003C6D7A /* LocalDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalDBModel.swift; sourceTree = "<group>"; };
 		A44C456C1C3150D9003C6D7A /* ServerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerModel.swift; sourceTree = "<group>"; };
 		A46406EE1C3BB88D00E9ECAA /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		A4A8B61F1C48FA270015434D /* BillListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BillListTableViewController.swift; sourceTree = "<group>"; };
+		A4A8B6211C48FA8A0015434D /* NewBillTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewBillTableViewController.swift; sourceTree = "<group>"; };
+		A4A8B6231C48FAA50015434D /* ItemListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemListTableViewController.swift; sourceTree = "<group>"; };
+		A4A8B6251C48FAC70015434D /* NewItemTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewItemTableViewController.swift; sourceTree = "<group>"; };
 		A4E07E121C47EF71006B8C06 /* TipDetailWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipDetailWebView.swift; sourceTree = "<group>"; };
 		A4FA704B1C47C33000ED63EC /* TipListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipListTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -201,6 +209,10 @@
 				A41EAAE91C47964600BFBB15 /* NewDestinationTableViewController.swift */,
 				A41EAAEB1C479CE100BFBB15 /* DestinationResultTableViewController.swift */,
 				A41EAAED1C47B42300BFBB15 /* PlanTableViewController.swift */,
+				A4A8B61F1C48FA270015434D /* BillListTableViewController.swift */,
+				A4A8B6211C48FA8A0015434D /* NewBillTableViewController.swift */,
+				A4A8B6231C48FAA50015434D /* ItemListTableViewController.swift */,
+				A4A8B6251C48FAC70015434D /* NewItemTableViewController.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -390,12 +402,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4A8B6261C48FAC70015434D /* NewItemTableViewController.swift in Sources */,
 				A44AE3DD1C266F3E00E9A0E8 /* TravelTips.xcdatamodeld in Sources */,
 				A41EAAE61C47903500BFBB15 /* WeatherViewController.swift in Sources */,
 				A41EAAEE1C47B42300BFBB15 /* PlanTableViewController.swift in Sources */,
+				A4A8B6221C48FA8A0015434D /* NewBillTableViewController.swift in Sources */,
 				A41EAAEA1C47964600BFBB15 /* NewDestinationTableViewController.swift in Sources */,
 				A44AE3D71C266F3E00E9A0E8 /* MainViewController.swift in Sources */,
 				A44C45691C315086003C6D7A /* SigninViewController.swift in Sources */,
+				A4A8B6201C48FA270015434D /* BillListTableViewController.swift in Sources */,
+				A4A8B6241C48FAA50015434D /* ItemListTableViewController.swift in Sources */,
 				A4FA704C1C47C33000ED63EC /* TipListTableViewController.swift in Sources */,
 				A44AE3D51C266F3E00E9A0E8 /* AppDelegate.swift in Sources */,
 				A44C456D1C3150D9003C6D7A /* ServerModel.swift in Sources */,

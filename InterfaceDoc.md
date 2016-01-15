@@ -77,14 +77,18 @@ post请求，数据用json格式发送
 	"schedule_id" : "schedule_id",
 	"start" : "start time",
 	"end" : "end time",
-	"description" : "description",
+	"destination" : "destination",
+	"latitude" : "latitude",
+	"longitude" : "longitude",
 	"plan_num" : "plan number"
 },
 {
 	"schedule_id" : "schedule_id",
 	"start" : "start time",
 	"end" : "end time",
-	"description" : "description",
+	"destination" : "destination",
+	"latitude" : "latitude",
+	"longitude" : "longitude",
 	"plan_num" : "plan number"
 }]
 ```
@@ -135,17 +139,20 @@ post请求，数据用json格式发送
 },
 {
 	"item_id" : "item_id",
+	"item_time" : "item_time",
 	"item_num" : "item_num",
 	"item_description" : "item_description",
 	"item_name" : "item_name"
 },
 {
 	"item_id" : "item_id",
+	"item_time" : "item_time",
 	"item_num" : "item_num",
 	"item_description" : "item_description",
 	"item_name" : "item_name"
 }
 ]
+```
 ##向后台发送用户数据：
 ###URL:http://localhost:8088/travel_helper/returnData/
 post请求，数据用json格式发送
@@ -176,7 +183,10 @@ post请求，数据用json格式发送
 	"plan_num" : "plan number",
 	"start_date" : "start time",
 	"end_date" : "end time",
-	"description" : "description"
+	"destination" : "destination",
+	"latitude" : "latitude",
+	"longitude" : "longitude"
+	
 }
 ```
 4.向后台发送必备物品数据
@@ -188,6 +198,7 @@ post请求，数据用json格式发送
 	"item_num" : "item_num",
 	"item_name" : "item_name"
 }
+```
 ###Response post body  
 ```json
 {

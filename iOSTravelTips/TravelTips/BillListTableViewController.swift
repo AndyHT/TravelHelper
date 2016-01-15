@@ -1,16 +1,14 @@
 //
-//  PlanTableViewController.swift
+//  BillListTableViewController.swift
 //  TravelTips
 //
-//  Created by Teng on 1/14/16.
+//  Created by Teng on 1/15/16.
 //  Copyright © 2016 huoteng. All rights reserved.
 //
 
 import UIKit
 
-class PlanTableViewController: UITableViewController {
-    
-    var planArr:[Plan] = []
+class BillListTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,50 +18,6 @@ class PlanTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        
-        
-//        planArr.append(Plan(id: 1, lat: 30, lon: 120, name: "Shanghai", startDate: NSDate(), endDate: NSDate()))
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        let sessionID = NSUserDefaults.standardUserDefaults().valueForKey("sessionID") as! String
-
-        
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        
-        ServerModel.getData(sessionID, withType: DataType.Plan) { (plans) -> Void in
-            //将plan填入planArr
-        }
-        
-        if let sessionID = NSUserDefaults.standardUserDefaults().valueForKey("sessionID") as? String {
-            ServerModel.getData(sessionID, withType: DataType.Plan) { (plans) -> Void in
-                //将plan填入planArr，待测试
-                for index in 1..<plans.count {
-                    let destLat = plans[index]["latitude"].double!
-                    let destLon = plans[index]["longitude"].double!
-                    
-                    let destName = plans[index]["destination"].string!
-                    let startStr = plans[index]["start"].string!
-                    let endStr = plans[index]["end"].string!
-                    
-                    let planId = plans[index]["sechedule_id"].int!
-                    
-                    let startDate = dateFormatter.dateFromString(startStr)!
-                    let endDate = dateFormatter.dateFromString(endStr)!
-                    
-                    
-                    let newPlan = Plan(id: planId, lat: destLat, lon: destLon, name: destName, startDate: startDate, endDate: endDate)
-                    
-                    self.planArr.append(newPlan)
-                }
-            }
-        
-        
-        } else {
-            print("没有获得session")
-        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -75,27 +29,23 @@ class PlanTableViewController: UITableViewController {
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return 0
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return planArr.count
+        return 0
     }
 
-    
+    /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-        
-        let titleLabel = cell.viewWithTag(100) as! UILabel
-        let startDateLabel = cell.viewWithTag(101) as! UILabel
-        
-        titleLabel.text = planArr[indexPath.row].destinationName
-        startDateLabel.text = planArr[indexPath.row].startDate.description
+
+        // Configure the cell...
 
         return cell
     }
-    
+    */
 
     /*
     // Override to support conditional editing of the table view.
@@ -137,13 +87,8 @@ class PlanTableViewController: UITableViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "destinationSegue" {
-            let vc = segue.destinationViewController as! WeatherViewController
-            if let index = tableView.indexPathForSelectedRow {
-                vc.destination = self.planArr[index.row]
-            }
-        
-        }
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
     }
     
 

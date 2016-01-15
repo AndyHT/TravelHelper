@@ -95,6 +95,8 @@ class LoginViewController: UIViewController {
                 if name == "123" && pass == "123"{
                     
                 }else{
+                    
+                    
                     UIView.transitionWithView(self.warningMessage,
                         duration: 0.3,
                         options: .TransitionFlipFromTop,
