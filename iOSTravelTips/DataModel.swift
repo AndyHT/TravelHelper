@@ -41,11 +41,11 @@ enum TipType: String{
 }
 
 enum BillType: String {
-    case shopping = "shopping"
-    case food = "fodd"
-    case hotel = "hotel"
-    case traffic = "traffic"
-    case other = "other"
+    case Shopping = "shopping"
+    case Food = "fodd"
+    case Hotel = "hotel"
+    case Traffic = "traffic"
+    case Other = "other"
 }
 
 //通过继承实现泛化
@@ -53,7 +53,7 @@ class UserData {
     
 }
 
-class Bill: UserData {
+struct Bill {
     var billID:Int
     var value:Double
     var descriptin:String

@@ -20,40 +20,43 @@ class BillListTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        billArr.append(Bill(id: 0, value: 100.0, desc: "lalala", type: .Hotel, time: NSDate()))
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        
-        if let sessionID = NSUserDefaults.standardUserDefaults().valueForKey("sessionID") as? String {
-            ServerModel.getData(sessionID, withType: DataType.Bill) { (bills) -> Void in
-                //将plan填入planArr，待测试
-                for index in 1..<bills.count {
-                    let id = bills[index]["bill_id"].int!
-                    let value = bills[index]["value"].double!
-                    let description = bills[index]["bill_description"].string!
-                    
-                    let typeStr = bills[index]["bill_type"].string!
-                    let type = BillType(rawValue: typeStr)!
-                    
-                    let timeStr = bills[index]["bill_time"].string!
-                    let time = dateFormatter.dateFromString(timeStr)!
-                    
-                    
-                    let newBill = Bill(id: id, value: value, desc: description, type: type, time: time)
-                    
-                    self.billArr.append(newBill)
+        if billArr.count == 0 {
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            
+            if let sessionID = NSUserDefaults.standardUserDefaults().valueForKey("sessionID") as? String {
+                ServerModel.getData(sessionID, withType: DataType.Bill) { (bills) -> Void in
+                    //将plan填入planArr，待测试
+                    for index in 1..<bills.count {
+                        let id = bills[index]["bill_id"].int!
+                        let value = bills[index]["value"].double!
+                        let description = bills[index]["bill_description"].string!
+                        
+                        let typeStr = bills[index]["bill_type"].string!
+                        let type = BillType(rawValue: typeStr)!
+                        
+                        let timeStr = bills[index]["bill_time"].string!
+                        let time = dateFormatter.dateFromString(timeStr)!
+                        
+                        
+                        let newBill = Bill(id: id, value: value, desc: description, type: type, time: time)
+                        
+                        self.billArr.append(newBill)
+                    }
                 }
+                
+                
+            } else {
+                print("没有获得session")
             }
-            
-            
-        } else {
-            print("没有获得session")
         }
-
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -77,6 +80,24 @@ class BillListTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
 
+        let valueLabel = cell.viewWithTag(100) as! UILabel
+        let descLabel = cell.viewWithTag(101) as! UILabel
+        let typeImage = cell.viewWithTag(102) as! UIImageView
+        
+        valueLabel.text = "\(billArr[indexPath.row].value)"
+        descLabel.text = "\(billArr[indexPath.row].descriptin)"
+        switch billArr[indexPath.row].type {
+        case .Food:
+            typeImage.image = UIImage(named: "food_bill")
+        case .Hotel:
+            typeImage.image = UIImage(named: "hotel_bill")
+        case .Traffic:
+            typeImage.image = UIImage(named: "traffic_bill")
+        case .Shopping:
+            typeImage.image = UIImage(named: "shopping_bill")
+        case .Other:
+            typeImage.image = UIImage(named: "other_bill")
+        }
 
         return cell
     }

@@ -26,30 +26,32 @@ class ItemListTableViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        
-        if let sessionID = NSUserDefaults.standardUserDefaults().valueForKey("sessionID") as? String {
-            ServerModel.getData(sessionID, withType: DataType.Bill) { (items) -> Void in
-                //将plan填入planArr，未完成
-                for index in 1..<items.count {
-                    let id = items[index]["bill_id"].int!
-                    let number = items[index]["value"].int!
-                    let description = items[index]["bill_description"].string!
-                    let timeStr = items[index][""].string!
-                    let name = items[index]["bill_type"].string!
-                    
-                    let time = dateFormatter.dateFromString(timeStr)!
-                    
-                    let newItem = Item(id: id, number: number, desc: description, name: name, time: time)
-                    
-                    self.itemArr.append(newItem)
+        if itemArr.count == 0 {
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            
+            if let sessionID = NSUserDefaults.standardUserDefaults().valueForKey("sessionID") as? String {
+                ServerModel.getData(sessionID, withType: DataType.Bill) { (items) -> Void in
+                    //将plan填入planArr，未完成
+                    for index in 1..<items.count {
+                        let id = items[index]["bill_id"].int!
+                        let number = items[index]["value"].int!
+                        let description = items[index]["bill_description"].string!
+                        let timeStr = items[index][""].string!
+                        let name = items[index]["bill_type"].string!
+                        
+                        let time = dateFormatter.dateFromString(timeStr)!
+                        
+                        let newItem = Item(id: id, number: number, desc: description, name: name, time: time)
+                        
+                        self.itemArr.append(newItem)
+                    }
                 }
+                
+                
+            } else {
+                print("没有获得session")
             }
-            
-            
-        } else {
-            print("没有获得session")
         }
         
     }
@@ -81,18 +83,19 @@ class ItemListTableViewController: UITableViewController {
         let descriptionLabel = cell.viewWithTag(101) as! UILabel
         descriptionLabel.text = itemArr[indexPath.row].description
         
-        if itemArr[indexPath.row].check {
-            cell.accessibilityViewIsModal = false
+        if itemArr[indexPath.row].check  {
+            cell.accessoryType = .Checkmark
+        } else {
+            cell.accessoryType = .None
         }
         
-        cell.accessoryType = .Checkmark
         
         return cell
     }
     
-    override func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
-        
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         itemArr[indexPath.row].check = !itemArr[indexPath.row].check
+        self.tableView.reloadData()
     }
     
 

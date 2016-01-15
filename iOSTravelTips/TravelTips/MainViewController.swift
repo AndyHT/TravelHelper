@@ -4,12 +4,11 @@
 //
 //  Created by Teng on 12/20/15.
 //  Copyright © 2015 huoteng. All rights reserved.
-//  测试用
+//  主页面
 
 import UIKit
-import Alamofire
 
-class MainViewController: UIViewController {
+class MainViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,15 +21,15 @@ class MainViewController: UIViewController {
 //        ServerModel.getWeatherData(lat: 30, lon: 120) { (tmp2) -> Void in
 //            print("")
 //        }
-        ServerModel.login("3456789@qq.com", withPass: "123456")//OK
+//        ServerModel.login("3456789@qq.com", withPass: "123456")//OK
 //        ServerModel.registerNewUser("Teng", gender: "male", email: "3456789", passMD5: "123456")//OK
 
     }
 
     @IBAction func getData(sender: AnyObject) {
         //获取sessionID
-        let sessionID = NSUserDefaults.standardUserDefaults().valueForKey("sessionID") as! String
-        print("session:\(sessionID)")
+//        let sessionID = NSUserDefaults.standardUserDefaults().valueForKey("sessionID") as! String
+//        print("session:\(sessionID)")
 //        ServerModel.getData(sessionID, withType: .Plan)//OK
         
         
@@ -49,9 +48,9 @@ class MainViewController: UIViewController {
 //        ]
         
 //        ServerModel.deleteDataRecord(testData as! [String : AnyObject])
-        ServerModel.getTips(sessionID, destination: "London") { (test) -> Void in
-            print("Test:\(test)")
-        }
+//        ServerModel.getTips(sessionID, destination: "London") { (test) -> Void in
+//            print("Test:\(test)")
+//        }
 
     }
     override func didReceiveMemoryWarning() {

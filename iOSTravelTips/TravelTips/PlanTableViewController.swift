@@ -10,6 +10,7 @@ import UIKit
 
 class PlanTableViewController: UITableViewController {
     
+    @IBOutlet var planTableView: UITableView!
     var planArr:[Plan] = []
 
     override func viewDidLoad() {
@@ -22,47 +23,53 @@ class PlanTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
         
-//        planArr.append(Plan(id: 1, lat: 30, lon: 120, name: "Shanghai", startDate: NSDate(), endDate: NSDate()))
+        planArr.append(Plan(id: 1, lat: 30, lon: 120, name: "Shanghai", startDate: NSDate(), endDate: NSDate()))
     }
    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        let sessionID = NSUserDefaults.standardUserDefaults().valueForKey("sessionID") as! String
-
         
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        
-        ServerModel.getData(sessionID, withType: DataType.Plan) { (plans) -> Void in
-            //将plan填入planArr
-        }
-        
-        if let sessionID = NSUserDefaults.standardUserDefaults().valueForKey("sessionID") as? String {
+        if planArr.count == 0 {
+            let sessionID = NSUserDefaults.standardUserDefaults().valueForKey("sessionID") as! String
+            
+            
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            
             ServerModel.getData(sessionID, withType: DataType.Plan) { (plans) -> Void in
-                //将plan填入planArr，待测试
-                for index in 1..<plans.count {
-                    let destLat = plans[index]["latitude"].double!
-                    let destLon = plans[index]["longitude"].double!
-                    
-                    let destName = plans[index]["destination"].string!
-                    let startStr = plans[index]["start"].string!
-                    let endStr = plans[index]["end"].string!
-                    
-                    let planId = plans[index]["sechedule_id"].int!
-                    
-                    let startDate = dateFormatter.dateFromString(startStr)!
-                    let endDate = dateFormatter.dateFromString(endStr)!
-                    
-                    
-                    let newPlan = Plan(id: planId, lat: destLat, lon: destLon, name: destName, startDate: startDate, endDate: endDate)
-                    
-                    self.planArr.append(newPlan)
-                }
+                //将plan填入planArr
             }
-        
-        
+            
+            if let sessionID = NSUserDefaults.standardUserDefaults().valueForKey("sessionID") as? String {
+                ServerModel.getData(sessionID, withType: DataType.Plan) { (plans) -> Void in
+                    print("get plans")
+                    print(plans.count)
+                    //将plan填入planArr，待测试
+                    for index in 1..<plans.count {
+                        let destLat = plans[index]["latitude"].double!
+                        let destLon = plans[index]["longitude"].double!
+                        
+                        let destName = plans[index]["destination"].string!
+                        let startStr = plans[index]["start"].string!
+                        let endStr = plans[index]["end"].string!
+                        
+                        let planId = plans[index]["schedule_id"].int!
+                        
+                        let startDate = dateFormatter.dateFromString(startStr)!
+                        let endDate = dateFormatter.dateFromString(endStr)!
+                        
+                        
+                        let newPlan = Plan(id: planId, lat: destLat, lon: destLon, name: destName, startDate: startDate, endDate: endDate)
+                        
+                        self.planArr.append(newPlan)
+                    }
+                    self.planTableView.reloadData()
+                }
+            } else {
+                print("没有获得session")
+            }
         } else {
-            print("没有获得session")
+            
         }
     }
 

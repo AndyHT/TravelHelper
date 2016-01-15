@@ -1,22 +1,22 @@
 //
-//  NewBillTableViewController.swift
+//  BillTypeTableViewController.swift
 //  TravelTips
 //
-//  Created by Teng on 1/15/16.
+//  Created by Teng on 1/16/16.
 //  Copyright © 2016 huoteng. All rights reserved.
 //
 
 import UIKit
 
-class NewBillTableViewController: UITableViewController, SetBillTypeDelegate {
+protocol SetBillTypeDelegate {
+    func setBillTypeImage(type: BillType)
+}
 
-    @IBOutlet weak var billDescriptionTextView: UITextView!
-    @IBOutlet weak var billValueTextField: UITextField!
-    @IBOutlet weak var billTypeImageView: UIImageView!
-    var billType: BillType? = nil
-    var billDate: NSDate? = NSDate()
+class BillTypeTableViewController: UITableViewController {
     
-    
+    let typeArray = [BillType.Shopping, BillType.Food, BillType.Hotel, BillType.Traffic, BillType.Other]
+    var setTypeImagaDelegate:SetBillTypeDelegate?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -31,55 +31,6 @@ class NewBillTableViewController: UITableViewController, SetBillTypeDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    override func viewWillAppear(animated: Bool) {
-        if let type = billType {
-            switch type {
-            case .Food:
-                billTypeImageView.image = UIImage(named: "food_bill")
-            case .Hotel:
-                billTypeImageView.image = UIImage(named: "hotel_bill")
-            case .Shopping:
-                billTypeImageView.image = UIImage(named: "shopping_bill")
-            case .Traffic:
-                billTypeImageView.image = UIImage(named: "traffic_bill")
-            case .Other:
-                billTypeImageView.image = UIImage(named: "other_bill")
-            }
-        } else {
-            billTypeImageView.image = UIImage(named: "other_bill")
-        }
-    }
-    
-    
-    @IBAction func saveNewBillTapped(sender: AnyObject) {
-        //保存新账单到服务器
-        let description = billDescriptionTextView.text!
-        let value = Double(billValueTextField.text!)
-        if description != "" && value != nil && billType != nil && billDate != nil{
-            let sessionID = NSUserDefaults.standardUserDefaults().valueForKey("sessionID") as? String
-            let dateFormat = NSDateFormatter()
-            dateFormat.dateFormat = "yyyy-MM-dd"
-            
-            let tmp = ["sessionID", "dataType", "value", "bill_description", "bill_type", "bill_time"]
-            let tmp2 = [sessionID!, DataType.Bill.rawValue, "\(value)", description, billType!.rawValue, dateFormat.stringFromDate(billDate!)]
-            
-            let newBill = NSDictionary(objects: tmp2, forKeys: tmp) as! [String: AnyObject]
-            
-            ServerModel.addNewData(newBill, dataType: DataType.Bill, callbcak: { (isSuccess) -> Void in
-                if isSuccess {
-                    print("Bill save success")
-                    self.navigationController?.popToRootViewControllerAnimated(true)
-                } else {
-                    print("Bill save fail")
-                }
-            })
-        }
-    }
-    
-    func setBillTypeImage(type: BillType) {
-        self.billType = type
-    }
 
     // MARK: - Table view data source
 
@@ -90,7 +41,15 @@ class NewBillTableViewController: UITableViewController, SetBillTypeDelegate {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 6
+        return 5
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if let delegate = self.setTypeImagaDelegate {
+            delegate.setBillTypeImage(typeArray[indexPath.row])
+        }
+        
+        self.navigationController?.popViewControllerAnimated(true)
     }
 
     /*
@@ -138,16 +97,14 @@ class NewBillTableViewController: UITableViewController, SetBillTypeDelegate {
     }
     */
 
-
+    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "setBillType" {
-            let vc = segue.destinationViewController as! BillTypeTableViewController
-            vc.setTypeImagaDelegate = self
-        }
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
     }
-    
+    */
 
 }

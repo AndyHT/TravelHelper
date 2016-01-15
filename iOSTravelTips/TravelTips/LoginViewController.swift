@@ -88,13 +88,17 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.loginButton.addSubview(self.spinner)
         self.spinner.frame.origin = CGPointMake(9,7)
         self.spinner.startAnimating()
-        if let name = username  {
-            if  let pass = password {
-                if name == "123" && pass == "123"{
+        if let name = username, pass = password  {
+            ServerModel.login(name, withPass: pass.md5(), callback: { (sessionID) -> Void in
+                if let session = sessionID {
+                    //登录成功，跳转到首页
+                    NSUserDefaults.standardUserDefaults().setObject(session, forKey: "sessionID")
                     
-                }else{
+                    let nextView = self.storyboard!.instantiateViewControllerWithIdentifier("MainView") as! MainViewController
                     
-                    
+                    self.presentViewController(nextView, animated: true, completion: nil)
+                } else {
+                    //登录失败
                     UIView.transitionWithView(self.warningMessage,
                         duration: 0.3,
                         options: .TransitionFlipFromTop,
@@ -123,7 +127,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                             })
                     })
                 }
-            }
+            })
+                
         }
         
         

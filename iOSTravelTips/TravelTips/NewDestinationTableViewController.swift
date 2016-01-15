@@ -16,8 +16,6 @@ class NewDestinationTableViewController: UITableViewController, SetDestinationDe
     @IBOutlet weak var cityNameInput: UITextField!
 
     @IBOutlet weak var inputCell: UITableViewCell!
-    @IBOutlet weak var startDateLabel: UILabel!
-    @IBOutlet weak var endDateLabel: UILabel!
     
     @IBOutlet weak var startDatePickerCell: DatePickerCell!
     @IBOutlet weak var endDatePickerCell: DatePickerCell!
@@ -122,7 +120,42 @@ class NewDestinationTableViewController: UITableViewController, SetDestinationDe
         }
     }
     
+//    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+//        self.cityNameInput.resignFirstResponder()
+//        startSearchDestination()
+//    }
+    
     @IBAction func saveDestination(sender: UIBarButtonItem) {
+        
+        if let destination = userDestination?.name {
+            let dateFormat = NSDateFormatter()
+            dateFormat.dateFormat = "yyyy-MM-dd"
+            
+            let lat = userDestination!.placemark.location!.coordinate.latitude
+            let lon = userDestination!.placemark.location!.coordinate.longitude
+            let start = cells[0][1].date!
+            let end = cells[0][2].date!
+            let sessionID = NSUserDefaults.standardUserDefaults().valueForKey("sessionID") as! String
+//            print("Date:\(start)\t\(end)")
+            
+            let tmp = ["sessionID", "dataType", "plan_num", "start_date", "end_date", "destination", "latitude", "longitude"]
+            let tmp2 = [sessionID, DataType.Plan.rawValue, "1", dateFormat.stringFromDate(start), dateFormat.stringFromDate(end), destination, "\(lat)", "\(lon)"]
+            let newPlan = NSDictionary(objects: tmp2, forKeys: tmp) as! [String : AnyObject]
+            print(newPlan)
+            //保存Plan数据到数据库
+            ServerModel.addNewData(newPlan, dataType: DataType.Plan) { (isSuccess) -> Void in
+                if isSuccess {
+                    //保存数据成功
+                    print("Save Plan Seucceed")
+                    self.navigationController?.popToRootViewControllerAnimated(true)
+                } else {
+                    //保存数据失败
+                    print("Save Plan Fail")
+                }
+            }
+        }
+        
+        
         
         
     }

@@ -26,10 +26,10 @@ class TipListTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-//        tips.append(Tip(title: "上海旅游好去处", content: "不额外分为婉无法访问裤别为方便我违反哟各位哟", type: .strategy, coverImgName: "mountain_in_fog"))
-//        tips.append(Tip(title: "东方明珠", content: "不发威五分裤额的个月为婉无法无关瑜无为方便我违恶服务有午饭晚饭", type: .sceneIntro, coverImgName: "mountain_in_fog"))
-//        tips.append(Tip(title: "防霾小窍门", content: "不额的个侧五块月为婉无法访问裤为无恶服务有午饭晚饭", type: .skill, coverImgName: "mountain_in_fog"))
-//        tips.append(Tip(title: "在上海的日子", content: "不额的个月为婉无法无关瑜无违反有关违法美不饿恶服务有午饭晚饭", type: .diary, coverImgName: "mountain_in_fog"))
+        tips.append(Tip(title: "上海旅游好去处", content: "不额外分为婉无法访问裤别为方便我违反哟各位哟", type: .strategy, coverImgName: "mountain_in_fog"))
+        tips.append(Tip(title: "东方明珠", content: "不发威五分裤额的个月为婉无法无关瑜无为方便我违恶服务有午饭晚饭", type: .sceneIntro, coverImgName: "mountain_in_fog"))
+        tips.append(Tip(title: "防霾小窍门", content: "不额的个侧五块月为婉无法访问裤为无恶服务有午饭晚饭", type: .skill, coverImgName: "mountain_in_fog"))
+        tips.append(Tip(title: "在上海的日子", content: "不额的个月为婉无法无关瑜无违反有关违法美不饿恶服务有午饭晚饭", type: .diary, coverImgName: "mountain_in_fog"))
         
         let loadingView = DGElasticPullToRefreshLoadingViewCircle()
         loadingView.tintColor = UIColor(red: 78/255.0, green: 221/255.0, blue: 200/255.0, alpha: 1.0)
@@ -50,33 +50,30 @@ class TipListTableViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
-        
-        
-        if let sessionID = NSUserDefaults.standardUserDefaults().valueForKey("sessionID") as? String {
-            
-            var destination = ""
-            if let firstDest = NSUserDefaults.standardUserDefaults().valueForKey("destination") as? String {
-                destination = firstDest
-            }
-            ServerModel.getTips(sessionID, destination: destination) { (tipsJSON) -> Void in
-                //将tipsDict填入tips中，待测试
-                for index in 1..<tipsJSON.count {
-                    
-                    let tipTitle = tipsJSON[index]["title"].string!
-                    let tipContent = tipsJSON["content"].string!
-                    let type = tipsJSON["type"].string!
-                    let tipType = TipType(rawValue: type)!
-                    let tipPicture = tipsJSON["picture"].string!
-                    
-                    self.tips.append(Tip(title: tipTitle, content: tipContent, type: tipType, coverImgName: tipPicture))
+        if tips.count == 0 {
+            if let sessionID = NSUserDefaults.standardUserDefaults().valueForKey("sessionID") as? String {
+                
+                var destination = ""
+                if let firstDest = NSUserDefaults.standardUserDefaults().valueForKey("destination") as? String {
+                    destination = firstDest
                 }
+                ServerModel.getTips(sessionID, destination: destination) { (tipsJSON) -> Void in
+                    //将tipsDict填入tips中，待测试
+                    for index in 1..<tipsJSON.count {
+                        
+                        let tipTitle = tipsJSON[index]["title"].string!
+                        let tipContent = tipsJSON["content"].string!
+                        let type = tipsJSON["type"].string!
+                        let tipType = TipType(rawValue: type)!
+                        let tipPicture = tipsJSON["picture"].string!
+                        
+                        self.tips.append(Tip(title: tipTitle, content: tipContent, type: tipType, coverImgName: tipPicture))
+                    }
+                }
+            } else {
+                print("没有获得session")
             }
-        } else {
-            print("没有获得session")
         }
-
-        
-        
     }
 
     override func didReceiveMemoryWarning() {

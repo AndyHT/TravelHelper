@@ -10,6 +10,8 @@ import UIKit
 
 class NewItemTableViewController: UITableViewController {
 
+    @IBOutlet weak var itemNameTextField: UITextField!
+    @IBOutlet weak var itemDescTextView: UITextView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,12 +31,41 @@ class NewItemTableViewController: UITableViewController {
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return 5
+    }
+    
+    @IBAction func saveNewItem(sender: AnyObject) {
+        let name = itemNameTextField.text!
+        let description = itemDescTextView.text!
+        
+        if name != "" && description != "" {
+            let sessionID = NSUserDefaults.standardUserDefaults().valueForKey("sessionID") as! String!
+            let dateFormat = NSDateFormatter()
+            dateFormat.dateFormat = "yyyy-MM-dd"
+            
+            let tmp = ["sessionID", "dataType", "item_description", "item_num", "item_name", "item_time"]
+            let tmp2 = [sessionID, DataType.Item.rawValue, description, "1", "name", dateFormat.stringFromDate(NSDate())]
+            
+            let newItem = NSDictionary(objects: tmp2, forKeys: tmp) as! [String: AnyObject]
+            
+            ServerModel.addNewData(newItem, dataType: DataType.Item, callbcak: { (isSuccess) -> Void in
+                if isSuccess {
+                    print("item save suceess")
+                    self.navigationController?.popViewControllerAnimated(true)
+                } else {
+                    print("item save fail")
+                }
+            })
+        }
+    }
+    
+    @IBAction func cancelSaved(sender: AnyObject) {
+        self.navigationController?.popViewControllerAnimated(true)
     }
 
     /*

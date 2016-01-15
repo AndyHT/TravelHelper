@@ -15,8 +15,7 @@ class ServerModel: NSObject {
     //在使用网络前还需要判断网络状态
     
     //登录，OK
-    static func login(userEmail: String, withPass userPassMD5: String) -> Bool {
-        var isSuccessed = false
+    static func login(userEmail: String, withPass userPassMD5: String, callback: (String?) -> Void) {
         print("send http request....")
         Alamofire.request(.POST, "http://10.0.1.32:8088/travel_helper/login", parameters: ["email": userEmail, "password": userPassMD5], encoding: .JSON)
             .responseJSON { response in
@@ -26,13 +25,12 @@ class ServerModel: NSObject {
                     if let result = json["result"].bool {
                         if result {
                             print("REUSLT:\(result)")
-                            print("get response")
                             let sessionID = json["sessionID"].string!
                             print("sessionID:\t\(sessionID)")
-                            NSUserDefaults.standardUserDefaults().setObject(sessionID, forKey: "sessionID")
-                            isSuccessed = true
+                            callback(sessionID)
                         } else {
                             //登录失败，重新登录
+                            callback(nil)
                             print("登录失败")
                         }
                     }
@@ -41,8 +39,6 @@ class ServerModel: NSObject {
                     print("未收到response")
                 }
         }
-        
-        return isSuccessed
     }
     
 
@@ -104,9 +100,7 @@ class ServerModel: NSObject {
     
     
     //向后台发送新数据，OK
-    static func addNewData(parameter: [String: AnyObject]) -> Bool {
-        var isSuccessed = false
-                
+    static func addNewData(parameter: [String : AnyObject], dataType: DataType, callbcak: (Bool) -> Void) {
         Alamofire.request(.POST, "http://10.0.1.32:8088/travel_helper/returnData", parameters: parameter, encoding: .JSON)
             .responseJSON { response in
                 if let resultValue = response.result.value {
@@ -115,17 +109,18 @@ class ServerModel: NSObject {
                         if result {
                             //数据插入Server数据库成功
                             print("插入数据成功")
-                            isSuccessed = true
+                            callbcak(true)
                         } else {
                             //数据插入Server数据库失败
+                            callbcak(false)
                         }
                     }
                 } else {
                     //没有接收到response
                     print("未收到response")
+                    callbcak(false)
                 }
         }
-        return isSuccessed
     }
     
     
