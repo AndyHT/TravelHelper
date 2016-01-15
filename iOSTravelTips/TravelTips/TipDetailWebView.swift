@@ -17,8 +17,14 @@ class TipDetailWebView: UIViewController, UIWebViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         
-        tipWebView.loadHTMLString("<p>Hello World</p>", baseURL: nil)
+        if let content = tipDetail {
+            tipWebView.loadHTMLString(content, baseURL: nil)
+        }
     }
     /*
     // Only override drawRect: if you perform custom drawing.

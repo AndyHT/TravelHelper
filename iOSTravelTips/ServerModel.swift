@@ -72,14 +72,14 @@ class ServerModel: NSObject {
     }
     
     //获取用户数据，OK
-    static func getData(sessionID: String, withType dataType:DataType, callback: (NSArray) -> Void) {
+    static func getData(sessionID: String, withType dataType:DataType, callback: (JSON) -> Void) {
         print("send request...")
         
         
         Alamofire.request(.POST, "http://10.0.1.32:8088/travel_helper/data", parameters: ["sessionID": sessionID, "dataType": dataType.rawValue], encoding: .JSON)
             .responseJSON { response in
                 if let resultValue = response.result.value {
-                    let json = resultValue as! NSArray
+                    let json = JSON(resultValue)
                     
                     callback(json)
                 } else {
@@ -89,11 +89,11 @@ class ServerModel: NSObject {
         }
     }
     
-    static func getTips(sessionID: String, destination: String, callback: (NSArray) -> Void ) {
+    static func getTips(sessionID: String, destination: String, callback: (JSON) -> Void ) {
         Alamofire.request(.POST, "http://10.0.1.32:8088/travel_helper/data", parameters: ["sessionID": sessionID, "dataType": "tip", "destination": destination], encoding: .JSON)
             .responseJSON { response in
                 if let resultValue = response.result.value {
-                    let json = resultValue as! NSArray
+                    let json = JSON(resultValue)
                     
                     callback(json)
                 } else {

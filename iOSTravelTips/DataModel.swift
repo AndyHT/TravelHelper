@@ -54,13 +54,15 @@ class Note: UserData {
 }
 
 class Plan: UserData {
+    var planID:Int
     var destinationLat:Double
     var destinationLon:Double
     var destinationName:String
     var startDate:NSDate
     var endDate:NSDate
     
-    init(lat:Double, lon:Double, name:String, startDate:NSDate, endDate:NSDate) {
+    init(id:Int, lat:Double, lon:Double, name:String, startDate:NSDate, endDate:NSDate) {
+        self.planID = id
         self.destinationLat = lat
         self.destinationLon = lon
         self.destinationName = name
