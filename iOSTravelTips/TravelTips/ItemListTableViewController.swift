@@ -9,6 +9,8 @@
 import UIKit
 
 class ItemListTableViewController: UITableViewController {
+    
+    var itemArr = [Item]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,6 +20,38 @@ class ItemListTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        itemArr.append(Item(id: 1, number: 1, desc: "lalal", name: "haha", time: NSDate()))
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        
+        if let sessionID = NSUserDefaults.standardUserDefaults().valueForKey("sessionID") as? String {
+            ServerModel.getData(sessionID, withType: DataType.Bill) { (items) -> Void in
+                //将plan填入planArr，未完成
+                for index in 1..<items.count {
+                    let id = items[index]["bill_id"].int!
+                    let number = items[index]["value"].int!
+                    let description = items[index]["bill_description"].string!
+                    let timeStr = items[index][""].string!
+                    let name = items[index]["bill_type"].string!
+                    
+                    let time = dateFormatter.dateFromString(timeStr)!
+                    
+                    let newItem = Item(id: id, number: number, desc: description, name: name, time: time)
+                    
+                    self.itemArr.append(newItem)
+                }
+            }
+            
+            
+        } else {
+            print("没有获得session")
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,23 +63,38 @@ class ItemListTableViewController: UITableViewController {
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return itemArr.count
     }
 
-    /*
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
-
-        // Configure the cell...
-
+        
+        let nameLabel = cell.viewWithTag(100) as! UILabel
+        nameLabel.text = itemArr[indexPath.row].name
+        
+        let descriptionLabel = cell.viewWithTag(101) as! UILabel
+        descriptionLabel.text = itemArr[indexPath.row].description
+        
+        if itemArr[indexPath.row].check {
+            cell.accessibilityViewIsModal = false
+        }
+        
+        cell.accessoryType = .Checkmark
+        
         return cell
     }
-    */
+    
+    override func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
+        
+        itemArr[indexPath.row].check = !itemArr[indexPath.row].check
+    }
+    
 
     /*
     // Override to support conditional editing of the table view.

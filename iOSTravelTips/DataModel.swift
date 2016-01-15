@@ -40,12 +40,34 @@ enum TipType: String{
     case diary = "Travel notes"
 }
 
+enum BillType: String {
+    case shopping = "shopping"
+    case food = "fodd"
+    case hotel = "hotel"
+    case traffic = "traffic"
+    case other = "other"
+}
+
 //通过继承实现泛化
 class UserData {
     
 }
 
 class Bill: UserData {
+    var billID:Int
+    var value:Double
+    var descriptin:String
+    var type:BillType
+    var time:NSDate
+    init(id: Int, value: Double, desc: String, type: BillType, time: NSDate) {
+        self.billID = id
+        self.value = value
+        self.descriptin = desc
+        self.type = type
+        self.time = time
+    }
+    
+    
     
 }
 
@@ -53,8 +75,25 @@ class Note: UserData {
     
 }
 
+class Item: UserData {
+    var id:Int
+    var number:Int
+    var description:String
+    var name:String
+    var time:NSDate
+    var check = false
+    
+    init(id: Int, number: Int, desc: String, name: String, time: NSDate) {
+        self.id = id
+        self.number = number
+        self.description = desc
+        self.name = name
+        self.time = time
+    }
+}
+
 class Plan: UserData {
-    var planID:Int
+    var id:Int
     var destinationLat:Double
     var destinationLon:Double
     var destinationName:String
@@ -62,7 +101,7 @@ class Plan: UserData {
     var endDate:NSDate
     
     init(id:Int, lat:Double, lon:Double, name:String, startDate:NSDate, endDate:NSDate) {
-        self.planID = id
+        self.id = id
         self.destinationLat = lat
         self.destinationLon = lon
         self.destinationName = name

@@ -9,6 +9,8 @@
 import UIKit
 
 class BillListTableViewController: UITableViewController {
+    
+    var billArr = [Bill]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,6 +20,40 @@ class BillListTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        
+        if let sessionID = NSUserDefaults.standardUserDefaults().valueForKey("sessionID") as? String {
+            ServerModel.getData(sessionID, withType: DataType.Bill) { (bills) -> Void in
+                //将plan填入planArr，待测试
+                for index in 1..<bills.count {
+                    let id = bills[index]["bill_id"].int!
+                    let value = bills[index]["value"].double!
+                    let description = bills[index]["bill_description"].string!
+                    
+                    let typeStr = bills[index]["bill_type"].string!
+                    let type = BillType(rawValue: typeStr)!
+                    
+                    let timeStr = bills[index]["bill_time"].string!
+                    let time = dateFormatter.dateFromString(timeStr)!
+                    
+                    
+                    let newBill = Bill(id: id, value: value, desc: description, type: type, time: time)
+                    
+                    self.billArr.append(newBill)
+                }
+            }
+            
+            
+        } else {
+            print("没有获得session")
+        }
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,23 +65,22 @@ class BillListTableViewController: UITableViewController {
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return billArr.count
     }
 
-    /*
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
 
-        // Configure the cell...
 
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.
@@ -87,8 +122,7 @@ class BillListTableViewController: UITableViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        
     }
     
 
