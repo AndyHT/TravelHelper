@@ -1,8 +1,8 @@
-function test() {
-  //获取用户编辑的文本（包括html标签）
-  var content = tinymce.activeEditor.getContent();
-  console.log("Content:\n" + content);
-}
+//function test() {
+//  //获取用户编辑的文本（包括html标签）
+//  var content = tinymce.activeEditor.getContent();
+//  console.log("Content:\n" + content);
+//}
 
 
 // 1、如果当前页面只有一个编辑器：
@@ -18,3 +18,46 @@ function test() {
 // var editBody = activeEditor.getBody();
 // activeEditor.selection.select(editBody);
 // var text = activeEditor.selection.getContent( { 'format' : 'text' } );
+
+$("#btnSub").click(function(){
+  var content = tinymce.activeEditor.getContent();
+  var pic = $("#picture").val().substr();
+  var picURL = "http://10.0.1.32:8088/travel_helper/img/" + pic;
+  //var activeEditor = tinymce.activeEditor;
+  //var editBody = activeEditor.getBody();
+  //activeEditor.selection.select(editBody);
+  //var content = activeEditor.selection.getContent( { 'format' : 'text' } );
+  $.ajax({
+    type:'POST',
+    url: 'http://localhost:8088/travel_helper/PushRecommends',
+    data: {
+      type: $("#type").val(),
+      destination: $("#destination").val(),
+      content: content,
+      picture: picURL,
+      title: $("#title").val()
+    },
+    success: function (data, textStatus, jqXHR) {
+      if (data.result) {
+        $("#result").html("Submitted successfully!" + data.test);
+        //setTimeout(function() {
+        //  $(':input','#pushForm')
+        //    .not(':button, :submit, :reset')
+        //    .val('');
+        //  $("#result").html('');
+        //}, 2000);
+
+      }
+      else {
+        $("#result").html("Submitted failed!");
+      }
+    },
+
+    error: function (jqXHR, textStatus, errorThrown) {
+      console.log("Something really bad happened " + textStatus);
+      console.log(XMLHttpRequest.status);
+      console.log(XMLHttpRequest.readyState);
+      console.log(textStatus);
+    }
+  });
+});

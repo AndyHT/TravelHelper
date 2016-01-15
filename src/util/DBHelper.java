@@ -23,7 +23,7 @@ public class DBHelper {
     {
         if(conn==null)
         {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/travel_tips","root","151094");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/travel_tips?userUnicode=true&characterEncoding=UTF-8","root","151094");
             return conn;
         }
         return conn;
