@@ -27,10 +27,15 @@ class PlanTableViewController: UITableViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        let sessionID = NSUserDefaults.standardUserDefaults().valueForKey("sessionID") as! String
+
         
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         
+        ServerModel.getData(sessionID, withType: DataType.Plan) { (plans) -> Void in
+            //将plan填入planArr
+        }
         
         if let sessionID = NSUserDefaults.standardUserDefaults().valueForKey("sessionID") as? String {
             ServerModel.getData(sessionID, withType: DataType.Plan) { (plans) -> Void in

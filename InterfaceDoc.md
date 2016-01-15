@@ -139,12 +139,14 @@ post请求，数据用json格式发送
 },
 {
 	"item_id" : "item_id",
+	"item_time" : "item_time",
 	"item_num" : "item_num",
 	"item_description" : "item_description",
 	"item_name" : "item_name"
 },
 {
 	"item_id" : "item_id",
+	"item_time" : "item_time",
 	"item_num" : "item_num",
 	"item_description" : "item_description",
 	"item_name" : "item_name"
