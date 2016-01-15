@@ -27,12 +27,12 @@ class PlanTableViewController: UITableViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        let sessionID = NSUserDefaults.standardUserDefaults().valueForKey("sessionID") as! String
+//        let sessionID = NSUserDefaults.standardUserDefaults().valueForKey("sessionID") as! String
         
         
-        ServerModel.getData(sessionID, withType: DataType.Plan) { (plans) -> Void in
-            //将plan填入planArr
-        }
+//        ServerModel.getData(sessionID, withType: DataType.Plan) { (plans) -> Void in
+//            //将plan填入planArr
+//        }
     }
 
     override func didReceiveMemoryWarning() {
