@@ -9,10 +9,11 @@
 import UIKit
 import DGElasticPullToRefresh
 
-class PlanTableViewController: UITableViewController {
+class PlanTableViewController: UITableViewController, AddNewPlanDelegate {
     
     @IBOutlet var planTableView: UITableView!
     var planArr:[Plan] = []
+    var isNeedReload = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +31,10 @@ class PlanTableViewController: UITableViewController {
         loadingView.tintColor = UIColor(red: 255/255.0, green: 208/255.0, blue: 80/255.0, alpha: 1.0)
         planTableView.dg_addPullToRefreshWithActionHandler ({ [weak self] () -> Void in
             print("Refreshing")
+            
+            self!.planArr = []
+            self!.freshData()
+            
             self?.tableView.dg_stopLoading()
             }, loadingView: loadingView)
         tableView.dg_setPullToRefreshFillColor(UIColor(red: 59/255.0, green: 130/255.0, blue: 176/255.0, alpha: 1.0))
@@ -38,54 +43,70 @@ class PlanTableViewController: UITableViewController {
         
     }
     
+    func addNewPlan(newPlan: Plan) {
+        self.planArr.append(newPlan)
+        self.planTableView.reloadData()
+    }
+    
     deinit {
         tableView.dg_removePullToRefresh()
+    }
+    
+    func freshData() {
+        let sessionID = NSUserDefaults.standardUserDefaults().valueForKey("sessionID") as! String
+        
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        
+        ServerModel.getData(sessionID, withType: DataType.Plan) { (plans) -> Void in
+            //将plan填入planArr
+        }
+        
+        if let sessionID = NSUserDefaults.standardUserDefaults().valueForKey("sessionID") as? String {
+            ServerModel.getData(sessionID, withType: DataType.Plan) { (plans) -> Void in
+                print("get plans")
+                print(plans.count)
+                //将plan填入planArr，待测试
+                for index in 1..<plans.count {
+                    let destLat = plans[index]["latitude"].double!
+                    let destLon = plans[index]["longitude"].double!
+                    
+                    let destName = plans[index]["destination"].string!
+                    let startStr = plans[index]["start"].string!
+                    let endStr = plans[index]["end"].string!
+                    
+                    let planId = plans[index]["schedule_id"].int!
+                    
+                    let startDate = dateFormatter.dateFromString(startStr)!
+                    let endDate = dateFormatter.dateFromString(endStr)!
+                    
+                    
+                    let newPlan = Plan(id: planId, lat: destLat, lon: destLon, name: destName, startDate: startDate, endDate: endDate)
+                    
+                    self.planArr.append(newPlan)
+                }
+                self.planTableView.reloadData()
+                let dest = self.planArr[0].destinationName
+                NSUserDefaults.standardUserDefaults().setObject(dest, forKey: "destination")
+            }
+        } else {
+            print("没有获得session")
+        }
     }
    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
         if planArr.count == 0 {
-            let sessionID = NSUserDefaults.standardUserDefaults().valueForKey("sessionID") as! String
-            
-            
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd"
-            
-            ServerModel.getData(sessionID, withType: DataType.Plan) { (plans) -> Void in
-                //将plan填入planArr
-            }
-            
-            if let sessionID = NSUserDefaults.standardUserDefaults().valueForKey("sessionID") as? String {
-                ServerModel.getData(sessionID, withType: DataType.Plan) { (plans) -> Void in
-                    print("get plans")
-                    print(plans.count)
-                    //将plan填入planArr，待测试
-                    for index in 1..<plans.count {
-                        let destLat = plans[index]["latitude"].double!
-                        let destLon = plans[index]["longitude"].double!
-                        
-                        let destName = plans[index]["destination"].string!
-                        let startStr = plans[index]["start"].string!
-                        let endStr = plans[index]["end"].string!
-                        
-                        let planId = plans[index]["schedule_id"].int!
-                        
-                        let startDate = dateFormatter.dateFromString(startStr)!
-                        let endDate = dateFormatter.dateFromString(endStr)!
-                        
-                        
-                        let newPlan = Plan(id: planId, lat: destLat, lon: destLon, name: destName, startDate: startDate, endDate: endDate)
-                        
-                        self.planArr.append(newPlan)
-                    }
-                    self.planTableView.reloadData()
-                }
-            } else {
-                print("没有获得session")
-            }
+            freshData()
         } else {
-            
+            let dest = planArr[0].destinationName
+            NSUserDefaults.standardUserDefaults().setObject(dest, forKey: "destination")
+        }
+        
+        if isNeedReload {
+            self.planTableView.reloadData()
         }
     }
 
@@ -168,8 +189,11 @@ class PlanTableViewController: UITableViewController {
             let vc = segue.destinationViewController as! WeatherViewController
             if let index = tableView.indexPathForSelectedRow {
                 vc.destination = self.planArr[index.row]
+                
             }
-        
+        } else if segue.identifier == "newPlan" {
+            let vc = segue.destinationViewController as! NewDestinationTableViewController
+            vc.newPlanDelegate = self
         }
     }
     

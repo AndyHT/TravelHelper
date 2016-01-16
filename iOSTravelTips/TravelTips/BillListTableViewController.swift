@@ -10,7 +10,7 @@ import UIKit
 import DGElasticPullToRefresh
 
 
-class BillListTableViewController: UITableViewController {
+class BillListTableViewController: UITableViewController, AddNewBillDelegate {
     
     var billArr = [Bill]()
     @IBOutlet var billListTableView: UITableView!
@@ -30,12 +30,54 @@ class BillListTableViewController: UITableViewController {
         loadingView.tintColor = UIColor(red: 255/255.0, green: 208/255.0, blue: 80/255.0, alpha: 1.0)
         billListTableView.dg_addPullToRefreshWithActionHandler ({ [weak self] () -> Void in
             print("Refreshing")
+            
+            self!.billArr = []
+            self!.freshData()
+            
             self?.tableView.dg_stopLoading()
             }, loadingView: loadingView)
         tableView.dg_setPullToRefreshFillColor(UIColor(red: 59/255.0, green: 130/255.0, blue: 176/255.0, alpha: 1.0))
         tableView.dg_setPullToRefreshBackgroundColor(tableView.backgroundColor!)
 
     
+    }
+    
+    func addNewBill(newBill: Bill) {
+        self.billArr.append(newBill)
+        self.billListTableView.reloadData()
+    }
+    
+    func freshData() {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        
+        if let sessionID = NSUserDefaults.standardUserDefaults().valueForKey("sessionID") as? String {
+            ServerModel.getData(sessionID, withType: DataType.Bill) { (bills) -> Void in
+                for index in 1..<bills.count {
+                    print("get bill data")
+                    let id = bills[index]["bill_id"].int!
+                    let value = bills[index]["value"].double!
+                    let description = bills[index]["bill_description"].string!
+                    
+                    let typeStr = bills[index]["bill_type"].string!
+                    let type = BillType(rawValue: typeStr)!
+                    
+                    let timeStr = bills[index]["bill_time"].string!
+                    let time = dateFormatter.dateFromString(timeStr)!
+                    
+                    
+                    let newBill = Bill(id: id, value: value, desc: description, type: type, time: time)
+                    
+                    self.billArr.append(newBill)
+                }
+                self.billListTableView.reloadData()
+            }
+            
+            
+        } else {
+            print("没有获得session")
+        }
+
     }
     
     
@@ -47,35 +89,7 @@ class BillListTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         
         if billArr.count == 0 {
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd"
-            
-            if let sessionID = NSUserDefaults.standardUserDefaults().valueForKey("sessionID") as? String {
-                ServerModel.getData(sessionID, withType: DataType.Bill) { (bills) -> Void in
-                    for index in 1..<bills.count {
-                        print("get bill data")
-                        let id = bills[index]["bill_id"].int!
-                        let value = bills[index]["value"].double!
-                        let description = bills[index]["bill_description"].string!
-                        
-                        let typeStr = bills[index]["bill_type"].string!
-                        let type = BillType(rawValue: typeStr)!
-                        
-                        let timeStr = bills[index]["bill_time"].string!
-                        let time = dateFormatter.dateFromString(timeStr)!
-                        
-                        
-                        let newBill = Bill(id: id, value: value, desc: description, type: type, time: time)
-                        
-                        self.billArr.append(newBill)
-                    }
-                    self.billListTableView.reloadData()
-                }
-                
-                
-            } else {
-                print("没有获得session")
-            }
+            freshData()
         }
         
     }
@@ -164,7 +178,10 @@ class BillListTableViewController: UITableViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
+        if segue.identifier == "addNewBill" {
+            let vc = segue.destinationViewController as! NewBillTableViewController
+            vc.newBillDelegate = self
+        }
     }
     
 

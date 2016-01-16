@@ -66,13 +66,13 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="编辑" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WiY-TH-CsQ">
                                         <rect key="frame" x="243" y="12" width="34" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="日历" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sq7-Gg-rOm">
                                         <rect key="frame" x="84" y="15" width="34" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -251,6 +251,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="新增消费条目" id="AVu-Sz-S8t">
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="s5z-lS-9pF">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="saveNewBillTapped:" destination="TUx-xG-D64" id="dSs-Qi-nbp"/>
                             </connections>
@@ -496,7 +497,7 @@
             </objects>
             <point key="canvasLocation" x="1438.5" y="1222.5"/>
         </scene>
-        <!--Bill List Table View Controller-->
+        <!--账单-->
         <scene sceneID="hqo-FZ-lbo">
             <objects>
                 <tableViewController id="cGJ-3I-jLg" customClass="BillListTableViewController" customModule="TravelTips" customModuleProvider="target" sceneMemberID="viewController">
@@ -536,10 +537,11 @@
                             <outlet property="delegate" destination="cGJ-3I-jLg" id="CYI-Jt-lIp"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="QSs-ut-5BE">
+                    <navigationItem key="navigationItem" title="账单" id="QSs-ut-5BE">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="rcV-wq-vRE">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <segue destination="TUx-xG-D64" kind="show" id="VkG-dY-HNY"/>
+                                <segue destination="TUx-xG-D64" kind="show" identifier="addNewBill" id="VkG-dY-HNY"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -595,7 +597,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="xZk-rP-3X0">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <segue destination="Thg-AA-Fw5" kind="show" id="QHh-ti-7Fm"/>
+                                <segue destination="Thg-AA-Fw5" kind="show" identifier="addNewItem" id="QHh-ti-7Fm"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -681,7 +683,12 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="新增物品" id="rvd-Rp-dOH">
-                        <barButtonItem key="rightBarButtonItem" title="Save" id="KhI-Jp-vc6"/>
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="KhI-Jp-vc6">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="saveNewItem:" destination="Thg-AA-Fw5" id="7M4-H6-KUk"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
@@ -720,7 +727,7 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xGO-Hn-MLu">
                                 <rect key="frame" x="56" y="279" width="262" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dyK-XS-xM6">
                                 <rect key="frame" x="77" y="348" width="218" height="35"/>
@@ -808,7 +815,7 @@
             </objects>
             <point key="canvasLocation" x="-946.5" y="1855.5"/>
         </scene>
-        <!--Tip List Table View Controller-->
+        <!--Tips-->
         <scene sceneID="rLO-Y0-ulT">
             <objects>
                 <tableViewController id="sDD-CS-RS9" customClass="TipListTableViewController" customModule="TravelTips" customModuleProvider="target" sceneMemberID="viewController">
@@ -848,7 +855,7 @@
                             <outlet property="delegate" destination="sDD-CS-RS9" id="8dq-NI-eKH"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="JQ7-Ex-TOT"/>
+                    <navigationItem key="navigationItem" title="Tips" id="JQ7-Ex-TOT"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="refreshableTableView" destination="meg-gu-U14" id="Er8-Df-ia7"/>
@@ -930,7 +937,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="qLj-00-IIX">
                             <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
-                                <segue destination="4Tq-Sz-QOR" kind="show" id="Y8P-UQ-fi6"/>
+                                <segue destination="4Tq-Sz-QOR" kind="show" identifier="newPlan" id="Y8P-UQ-fi6"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1003,6 +1010,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Title" id="5f5-Zb-o3Q">
                         <barButtonItem key="rightBarButtonItem" systemItem="save" id="SJo-E3-htw">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="saveDestination:" destination="4Tq-Sz-QOR" id="Wqp-k8-D98"/>
                             </connections>
@@ -1227,6 +1235,6 @@
         <image name="yellow_circle" width="100" height="100"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="YvV-4a-gmb"/>
+        <segue reference="Y8P-UQ-fi6"/>
     </inferredMetricsTieBreakers>
 </document>

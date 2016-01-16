@@ -9,6 +9,10 @@
 import UIKit
 import DatePickerCell
 
+protocol AddNewItemDelegate {
+    func addNewItem(newItem: Item)
+}
+
 class NewItemTableViewController: UITableViewController {
 
     @IBOutlet weak var itemNameTextField: UITextField!
@@ -19,6 +23,7 @@ class NewItemTableViewController: UITableViewController {
     @IBOutlet var newItemTableView: UITableView!
     
     var cells:NSArray = []
+    var newItemDelegate:AddNewItemDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,24 +73,27 @@ class NewItemTableViewController: UITableViewController {
             let dateFormat = NSDateFormatter()
             dateFormat.dateFormat = "yyyy-MM-dd"
             
+            let itemDate = self.cells[0][2].date!
+            
             let tmp = ["sessionID", "dataType", "item_description", "item_num", "item_name", "item_time"]
-            let tmp2 = [sessionID, DataType.Item.rawValue, description, "1", "name", dateFormat.stringFromDate(NSDate())]
+            let tmp2 = [sessionID, DataType.Item.rawValue, description, "1", "name", dateFormat.stringFromDate(itemDate)]
             
             let newItem = NSDictionary(objects: tmp2, forKeys: tmp) as! [String: AnyObject]
             
             ServerModel.addNewData(newItem, dataType: DataType.Item, callbcak: { (isSuccess) -> Void in
                 if isSuccess {
                     print("item save suceess")
+                    
+                    if let delegate = self.newItemDelegate {
+                        delegate.addNewItem(Item(id: 0, number: 1, desc: description, name: "name", time: itemDate))
+                    }
+                    
                     self.navigationController?.popViewControllerAnimated(true)
                 } else {
                     print("item save fail")
                 }
             })
         }
-    }
-    
-    @IBAction func cancelSaved(sender: AnyObject) {
-        self.navigationController?.popViewControllerAnimated(true)
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {

@@ -9,7 +9,7 @@
 import UIKit
 import DGElasticPullToRefresh
 
-class ItemListTableViewController: UITableViewController {
+class ItemListTableViewController: UITableViewController, AddNewItemDelegate {
     
     var itemArr = [Item]()
 
@@ -28,11 +28,48 @@ class ItemListTableViewController: UITableViewController {
         loadingView.tintColor = UIColor(red: 255/255.0, green: 208/255.0, blue: 80/255.0, alpha: 1.0)
         itemListTableView.dg_addPullToRefreshWithActionHandler ({ [weak self] () -> Void in
             print("Refreshing")
+            
+            self!.itemArr = []
+            self!.freshData()
+            
             self?.tableView.dg_stopLoading()
             }, loadingView: loadingView)
         tableView.dg_setPullToRefreshFillColor(UIColor(red: 59/255.0, green: 130/255.0, blue: 176/255.0, alpha: 1.0))
         tableView.dg_setPullToRefreshBackgroundColor(tableView.backgroundColor!)
         
+    }
+    
+    func addNewItem(newItem: Item) {
+        self.itemArr.append(newItem)
+        
+        self.itemListTableView.reloadData()
+    }
+    
+    func freshData() {
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        
+        if let sessionID = NSUserDefaults.standardUserDefaults().valueForKey("sessionID") as? String {
+            ServerModel.getData(sessionID, withType: DataType.Bill) { (items) -> Void in
+                for index in 1..<items.count {
+                    let id = items[index]["bill_id"].int!
+                    let number = items[index]["value"].int!
+                    let description = items[index]["bill_description"].string!
+                    let timeStr = items[index]["bill_time"].string!
+                    let name = items[index]["bill_type"].string!
+                    
+                    let time = dateFormatter.dateFromString(timeStr)!
+                    
+                    let newItem = Item(id: id, number: number, desc: description, name: name, time: time)
+                    
+                    self.itemArr.append(newItem)
+                }
+                self.itemListTableView.reloadData()
+            }
+        } else {
+            print("没有获得session")
+        }
+
     }
     
     deinit {
@@ -43,29 +80,7 @@ class ItemListTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         
         if itemArr.count == 0 {
-            let dateFormatter = NSDateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd"
-            
-            if let sessionID = NSUserDefaults.standardUserDefaults().valueForKey("sessionID") as? String {
-                ServerModel.getData(sessionID, withType: DataType.Bill) { (items) -> Void in
-                    for index in 1..<items.count {
-                        let id = items[index]["bill_id"].int!
-                        let number = items[index]["value"].int!
-                        let description = items[index]["bill_description"].string!
-                        let timeStr = items[index]["bill_time"].string!
-                        let name = items[index]["bill_type"].string!
-                        
-                        let time = dateFormatter.dateFromString(timeStr)!
-                        
-                        let newItem = Item(id: id, number: number, desc: description, name: name, time: time)
-                        
-                        self.itemArr.append(newItem)
-                    }
-                    self.itemListTableView.reloadData()
-                }
-            } else {
-                print("没有获得session")
-            }
+            freshData()
         }
         
     }
@@ -148,14 +163,16 @@ class ItemListTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "addNewItem" {
+            let vc = segue.destinationViewController as! NewItemTableViewController
+            vc.newItemDelegate = self
+        }
     }
-    */
+    
 
 }

@@ -9,6 +9,10 @@
 import UIKit
 import DatePickerCell
 
+protocol AddNewBillDelegate {
+    func addNewBill(newBill: Bill)
+}
+
 class NewBillTableViewController: UITableViewController, SetBillTypeDelegate {
 
     @IBOutlet weak var billDescriptionTextView: UITextView!
@@ -25,6 +29,7 @@ class NewBillTableViewController: UITableViewController, SetBillTypeDelegate {
     var billType: BillType? = nil
     var billDate: NSDate? = NSDate()
     var cells:NSArray = []
+    var newBillDelegate:AddNewBillDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,13 +89,18 @@ class NewBillTableViewController: UITableViewController, SetBillTypeDelegate {
             dateFormat.dateFormat = "yyyy-MM-dd"
             
             let tmp = ["sessionID", "dataType", "value", "bill_description", "bill_type", "bill_time"]
-            let tmp2 = [sessionID!, DataType.Bill.rawValue, "\(value)", description, billType!.rawValue, dateFormat.stringFromDate(billDate!)]
+            let tmp2 = [sessionID!, DataType.Bill.rawValue, "\(value!)", description, billType!.rawValue, dateFormat.stringFromDate(billDate!)]
             
             let newBill = NSDictionary(objects: tmp2, forKeys: tmp) as! [String: AnyObject]
             
             ServerModel.addNewData(newBill, dataType: DataType.Bill, callbcak: { (isSuccess) -> Void in
                 if isSuccess {
                     print("Bill save success")
+                    
+                    if let delegate = self.newBillDelegate {
+                        delegate.addNewBill(Bill(id: 0, value: value!, desc: description, type: self.billType!, time: self.billDate!))
+                    }
+                    
                     self.navigationController?.popToRootViewControllerAnimated(true)
                 } else {
                     print("Bill save fail")

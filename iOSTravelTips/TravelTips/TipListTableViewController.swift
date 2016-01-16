@@ -49,7 +49,6 @@ class TipListTableViewController: UITableViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        print("count:\(tips.count)")
         if tips.count == 0 {
             if let sessionID = NSUserDefaults.standardUserDefaults().valueForKey("sessionID") as? String {
                 
@@ -60,13 +59,14 @@ class TipListTableViewController: UITableViewController {
                 }
                 ServerModel.getTips(sessionID, destination: destination) { (tipsJSON) -> Void in
                     //将tipsDict填入tips中，待测试
+                    print("count:\(tipsJSON.count)")
                     for index in 1..<tipsJSON.count {
                         print("get tips")
                         let tipTitle = tipsJSON[index]["title"].string!
-                        let tipContent = tipsJSON["content"].string!
-                        let type = tipsJSON["type"].string!
+                        let tipContent = tipsJSON[index]["content"].string!
+                        let type = tipsJSON[index]["type"].string!
                         let tipType = TipType(rawValue: type)!
-                        let tipPicture = tipsJSON["picture"].string!
+                        let tipPicture = "mountain_in_fog"
                         
                         self.tips.append(Tip(title: tipTitle, content: tipContent, type: tipType, coverImgName: tipPicture))
                     }

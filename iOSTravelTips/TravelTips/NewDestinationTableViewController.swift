@@ -10,6 +10,10 @@ import UIKit
 import MapKit
 import DatePickerCell
 
+protocol AddNewPlanDelegate {
+    func addNewPlan(newPlan: Plan)
+}
+
 class NewDestinationTableViewController: UITableViewController, SetDestinationDelegate, UITextFieldDelegate {
     
     var userDestination:MKMapItem? = nil
@@ -21,6 +25,7 @@ class NewDestinationTableViewController: UITableViewController, SetDestinationDe
     @IBOutlet weak var endDatePickerCell: DatePickerCell!
     
     var cells:NSArray = []
+    var newPlanDelegate:AddNewPlanDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -139,12 +144,16 @@ class NewDestinationTableViewController: UITableViewController, SetDestinationDe
             let tmp = ["sessionID", "dataType", "plan_num", "start_date", "end_date", "destination", "latitude", "longitude"]
             let tmp2 = [sessionID, DataType.Plan.rawValue, "1", dateFormat.stringFromDate(start), dateFormat.stringFromDate(end), destination, "\(lat)", "\(lon)"]
             let newPlan = NSDictionary(objects: tmp2, forKeys: tmp) as! [String : AnyObject]
-            print(newPlan)
+//            print(newPlan)
             //保存Plan数据到数据库
             ServerModel.addNewData(newPlan, dataType: DataType.Plan) { (isSuccess) -> Void in
                 if isSuccess {
                     //保存数据成功
                     print("Save Plan Seucceed")
+                    if let delegate = self.newPlanDelegate {
+                        delegate.addNewPlan(Plan(id: 0, lat: lat, lon: lon, name: destination, startDate: start, endDate: end))
+                    }
+
                     self.navigationController?.popToRootViewControllerAnimated(true)
                 } else {
                     //保存数据失败
