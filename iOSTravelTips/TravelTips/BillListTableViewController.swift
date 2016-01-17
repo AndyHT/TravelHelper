@@ -24,7 +24,7 @@ class BillListTableViewController: UITableViewController, AddNewBillDelegate {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-//        billArr.append(Bill(id: 0, value: 100.0, desc: "lalala", type: .Hotel, time: NSDate()))
+        billArr.append(Bill(id: 0, value: 100.0, desc: "lalala", type: .Hotel, time: NSDate()))
         
         let loadingView = DGElasticPullToRefreshLoadingViewCircle()
         loadingView.tintColor = UIColor(red: 255/255.0, green: 208/255.0, blue: 80/255.0, alpha: 1.0)

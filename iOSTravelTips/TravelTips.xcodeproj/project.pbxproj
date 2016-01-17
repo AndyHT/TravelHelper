@@ -203,11 +203,11 @@
 		A44C456F1C31510B003C6D7A /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				A44C45621C314D9E003C6D7A /* AddNewDestViewController.swift */,
 				A44C45641C31504D003C6D7A /* LoginViewController.swift */,
 				A44C45681C315086003C6D7A /* SigninViewController.swift */,
 				A41EAAED1C47B42300BFBB15 /* PlanTableViewController.swift */,
 				A41EAAE91C47964600BFBB15 /* NewDestinationTableViewController.swift */,
+				A44C45621C314D9E003C6D7A /* AddNewDestViewController.swift */,
 				A41EAAEB1C479CE100BFBB15 /* DestinationResultTableViewController.swift */,
 				A44AE3D61C266F3E00E9A0E8 /* MainViewController.swift */,
 				A41EAAE51C47903500BFBB15 /* WeatherViewController.swift */,
@@ -215,8 +215,8 @@
 				A4A8B6211C48FA8A0015434D /* NewBillTableViewController.swift */,
 				A4E175C91C497A6F006DF950 /* BillTypeTableViewController.swift */,
 				A4A8B6231C48FAA50015434D /* ItemListTableViewController.swift */,
-				A4A8B6251C48FAC70015434D /* NewItemTableViewController.swift */,
 				A4FA704B1C47C33000ED63EC /* TipListTableViewController.swift */,
+				A4A8B6251C48FAC70015434D /* NewItemTableViewController.swift */,
 				A4E07E121C47EF71006B8C06 /* TipDetailWebView.swift */,
 				3F926CF21C492D1A005DF683 /* CalendarViewController.swift */,
 			);

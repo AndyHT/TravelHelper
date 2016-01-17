@@ -22,7 +22,7 @@ class ItemListTableViewController: UITableViewController, AddNewItemDelegate {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-//        itemArr.append(Item(id: 1, number: 1, desc: "lalal", name: "haha", time: NSDate()))
+        itemArr.append(Item(id: 1, number: 1, desc: "lalal", name: "haha", time: NSDate()))
         
         let loadingView = DGElasticPullToRefreshLoadingViewCircle()
         loadingView.tintColor = UIColor(red: 255/255.0, green: 208/255.0, blue: 80/255.0, alpha: 1.0)
